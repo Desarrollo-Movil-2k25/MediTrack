@@ -22,3 +22,6 @@ Desarrollar una aplicación móvil que permita al usuario **registrar, visualiza
 # Autor
 **Esteban Amores**  
 Proyecto académico para el curso de **Desarrollo de Aplicaciones Móviles**.
+
+# MackUps
+![Texto alternativo](assets/Wireframe-MediTrack.png)
