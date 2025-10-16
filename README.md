@@ -1,5 +1,5 @@
 
-![Logo](https://i0.wp.com/indexdesarrollo.com/wp-content/uploads/2019/10/mejores-plataformas-hibridas-apps-moviles.jpg?fit=1023%2C500&ssl=1)
+![Encabezado](https://i0.wp.com/indexdesarrollo.com/wp-content/uploads/2019/10/mejores-plataformas-hibridas-apps-moviles.jpg?fit=1023%2C500&ssl=1)
 # Repositorio MediTrack
 Aplicación móvil en Kotlin para gestionar medicamentos, con registro, recordatorios y soporte para imágenes desde cámara o galería (Proyecto Individual del Curso de Desarrollo Móvil).
 
@@ -24,4 +24,4 @@ Desarrollar una aplicación móvil que permita al usuario **registrar, visualiza
 Proyecto académico para el curso de **Desarrollo de Aplicaciones Móviles**.
 
 # MackUps
-![Texto alternativo](assets/Wireframe-MediTrack.png)
+![MackUp](assets/Wireframe-MediTrack.png)
