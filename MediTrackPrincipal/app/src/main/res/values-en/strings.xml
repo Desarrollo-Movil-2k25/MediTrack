@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MediTrackPrincipal</string>
+    <string name="ErrorMsgAdd">Error adding data.</string>
+    <string name="ErrorMsgUpdate">Error modifying data.</string>
+    <string name="ErrorMsgRemove">Error deleting data.</string>
+    <string name="ErrorMsgGetAll">Error retrieving data.</string>
+    <string name="ErrorMsgGetEspecificData">Error retrieving specific data.</string>
+</resources>
