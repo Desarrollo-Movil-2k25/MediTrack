@@ -34,5 +34,4 @@ Gestiona el **almacenamiento y manipulación de datos**, incluyendo interfaces y
 Contiene **utilidades y helpers** para operaciones recurrentes o compartidas entre las diferentes capas del proyecto.
 
 ---
-
-
+## ✨ Descripción del Segundo Avance
