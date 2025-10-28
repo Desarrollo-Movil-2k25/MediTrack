@@ -5,4 +5,8 @@
     <string name="ErrorMsgRemove">Error al eliminar el dato.</string>
     <string name="ErrorMsgGetAll">Error al obtener los datos.</string>
     <string name="ErrorMsgGetEspecificData">Error al obtener el dato especifico.</string>
+    <string name="username_ly">Nombre de usuario</string>
+    <string name="password_ly">Contraseña</string>
+    <string name="login_ly">Iniciar Sesión</string>
+    <string name="create_acc_ly">Crear Cuenta</string>
 </resources>

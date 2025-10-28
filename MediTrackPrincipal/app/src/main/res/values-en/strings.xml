@@ -6,4 +6,8 @@
     <string name="ErrorMsgRemove">Error deleting data.</string>
     <string name="ErrorMsgGetAll">Error retrieving data.</string>
     <string name="ErrorMsgGetEspecificData">Error retrieving specific data.</string>
+    <string name="username_ly">User Name</string>
+    <string name="password_ly">Password</string>
+    <string name="login_ly">Login</string>
+    <string name="create_acc_ly">Register</string>
 </resources>
