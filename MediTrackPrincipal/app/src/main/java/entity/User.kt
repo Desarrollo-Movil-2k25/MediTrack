@@ -6,6 +6,7 @@ class User : Person {
     private var _nameUser: String = ""
     private var _password: String = ""
 
+
     // Constructor
     constructor(id: String,name: String,fLastName: String,sLastName: String, phone: Int,email: String,
                 birthday: Date,province: Province,state: String,district: String, address: String,
