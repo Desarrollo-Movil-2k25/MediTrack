@@ -35,3 +35,4 @@ Contiene **utilidades y helpers** para operaciones recurrentes o compartidas ent
 
 ---
 ## ✨ Descripción del Segundo Avance
+- Creación de los layouts de login y register.
