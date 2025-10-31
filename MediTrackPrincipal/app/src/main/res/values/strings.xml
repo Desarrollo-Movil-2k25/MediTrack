@@ -5,4 +5,26 @@
     <string name="ErrorMsgRemove">Error al eliminar el dato.</string>
     <string name="ErrorMsgGetAll">Error al obtener los datos.</string>
     <string name="ErrorMsgGetEspecificData">Error al obtener el dato especifico.</string>
+    <string name="username_ly">Nombre de usuario</string>
+    <string name="password_ly">Contraseña</string>
+    <string name="login_ly">Iniciar Sesión</string>
+    <string name="create_acc_ly">Crear Cuenta</string>
+    <string name="name_ly">Nombre</string>
+    <string name="lastName1_ly">Primer Apellido</string>
+    <string name="lastName2_ly">Segundo Apellido</string>
+    <string name="phone_ly">Teléfono</string>
+    <string name="email_ly">Correo Electrónico</string>
+    <string name="birthday_ly">Fecha de nacimiento</string>
+    <string name="state_ly">Cantón</string>
+    <string name="distric_ly">Distrito</string>
+    <string name="address_ly">Dirección exacta</string>
+    <string-array name="province_ly">
+        <item>San José</item>
+        <item>Alajuela</item>
+        <item>Cartago</item>
+        <item>Heredia</item>
+        <item>Guanacaste</item>
+        <item>Puntarenas</item>
+        <item>Limón</item>
+    </string-array>
 </resources>

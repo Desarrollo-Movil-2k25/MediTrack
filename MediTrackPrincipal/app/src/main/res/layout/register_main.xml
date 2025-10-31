@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_and_register_bg"
+    android:padding="16dp"
+    tools:context=".RegisterActivity">
+
+    <!-- Contenedor desplazable -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <!-- Contenido principal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Imagen de encabezado -->
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/circle_account" />
+
+            <!-- Título -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_acc_ly"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp" />
+
+            <!-- Nombre -->
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="@string/name_ly"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+
+            <!-- Primer apellido -->
+            <EditText
+                android:id="@+id/etFirstLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lastName1_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPersonName"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Segundo apellido -->
+            <EditText
+                android:id="@+id/etSecondLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lastName2_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPersonName"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Teléfono -->
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="phone"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Correo -->
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textEmailAddress"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Fecha de nacimiento -->
+            <EditText
+                android:id="@+id/etBirthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/birthday_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:focusable="false"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Provincia -->
+            <Spinner
+                android:id="@+id/spinner_province"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_corner"
+                android:entries="@array/province_ly"
+                android:padding="14dp"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"/>
+
+            <!-- Cantón -->
+            <EditText
+                android:id="@+id/etState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/state_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textCapWords"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Distrito -->
+            <EditText
+                android:id="@+id/etDistrict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/distric_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textCapWords"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Dirección -->
+            <EditText
+                android:id="@+id/etAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/address_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Usuario -->
+            <EditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/username_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPersonName"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Contraseña -->
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPassword"
+                android:textSize="18sp"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Botón de registrar -->
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_ly"
+                android:background="@drawable/rounded_corner"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:padding="14dp"
+                app:cornerRadius="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -6,4 +6,17 @@
     <string name="ErrorMsgRemove">Error deleting data.</string>
     <string name="ErrorMsgGetAll">Error retrieving data.</string>
     <string name="ErrorMsgGetEspecificData">Error retrieving specific data.</string>
+    <string name="username_ly">User Name</string>
+    <string name="password_ly">Password</string>
+    <string name="login_ly">Login</string>
+    <string name="create_acc_ly">Register</string>
+    <string name="name_ly">Name</string>
+    <string name="lastName1_ly">First Last Name</string>
+    <string name="lastName2_ly">Segund Last Name</string>
+    <string name="phone_ly">Phone</string>
+    <string name="email_ly">Email</string>
+    <string name="birthday_ly">Date of Birthday</string>
+    <string name="state_ly">State</string>
+    <string name="distric_ly">Distrito</string>
+    <string name="address_ly">Dirección exacta</string>
 </resources>
