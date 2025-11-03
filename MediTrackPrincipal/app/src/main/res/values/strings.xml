@@ -27,4 +27,16 @@
         <item>Puntarenas</item>
         <item>Limón</item>
     </string-array>
+    <string name="MsgDataNotFound">El dato no fue encontrado.</string>
+    <string name="MsgIsNorRegister">No estas registrado debes de create una cuenta.</string>
+    <string name="MsgIncorrectPassword">Contraseña Incorrecta.</string>
+    <string name="MsgLoginSuccess">Inición de sesión exitoso.</string>
+    <string name="id_ly">Identificación</string>
+    <string name="province_ly">Provincia</string>
+    <string name="TextYes">Si</string>
+    <string name="TextNo">No</string>
+    <string name="TextTitleDialogQuestion">Pregunta...</string>
+    <string name="MsgCreateAccSuccess">Creación de cuenta exitosamente.</string>
+    <string name="MsgDuplicated">Error: Identificación Duplicada</string>
+    <string name="MsgDuplicated2">Error: Nombre de Usuario ya existe</string>
 </resources>

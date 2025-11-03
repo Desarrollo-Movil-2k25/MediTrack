@@ -22,7 +22,7 @@
             android:src="@drawable/circle_account" />
 
         <EditText
-            android:id="@+id/username_input"
+            android:id="@+id/txtUsername_user_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -37,7 +37,7 @@
             android:textSize="20sp"/>
 
         <EditText
-            android:id="@+id/password_input"
+            android:id="@+id/txtPassword_user_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

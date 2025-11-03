@@ -1,15 +1,21 @@
 package entity
 
 import java.util.Date
+import java.time.LocalDate
 
 class User : Person {
     private var _nameUser: String = ""
     private var _password: String = ""
 
+    // Constructor vacío
+    constructor() : super() {
+        this._nameUser = ""
+        this._password = ""
+    }
 
     // Constructor
     constructor(id: String,name: String,fLastName: String,sLastName: String, phone: Int,email: String,
-                birthday: Date,province: Province,state: String,district: String, address: String,
+                birthday: LocalDate,province: Province,state: String,district: String, address: String,
                 nameUser: String, password: String):super(id,name,fLastName,sLastName,phone,
                                                           email, birthday, province, state,
                                                           district,address)

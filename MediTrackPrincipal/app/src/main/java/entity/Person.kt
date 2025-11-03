@@ -1,5 +1,6 @@
 package entity
 
+import java.time.LocalDate
 import java.util.Date
 
 open class Person {
@@ -9,14 +10,18 @@ open class Person {
     private var _sLastName: String=""
     private var _phone: Int=0
     private var _email: String=""
-    private lateinit var _birthday: Date
+    private lateinit var _birthday: LocalDate
     private lateinit var _province: Province
     private var _state: String=""
     private var _district: String=""
     private var _address: String = ""
 
+    // Constructor vacío
+    constructor()
+
+    // Constructor
     constructor(id: String, name: String, fLastName: String, sLastName: String, phone: Int,
-                email: String, birthday: Date, province: Province, state: String, district: String,
+                email: String, birthday: LocalDate, province: Province, state: String, district: String,
                 address: String){
         this._id = id
         this._name = name
@@ -56,7 +61,7 @@ open class Person {
         get() = this._email
         set(value) {this._email = value}
 
-    var birthday: Date
+    var birthday: LocalDate
         get() = this._birthday
         set(value) {this._birthday = value}
 

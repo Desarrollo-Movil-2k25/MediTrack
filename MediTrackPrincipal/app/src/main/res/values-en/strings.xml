@@ -19,4 +19,16 @@
     <string name="state_ly">State</string>
     <string name="distric_ly">Distrito</string>
     <string name="address_ly">Dirección exacta</string>
+    <string name="MsgDataNotFound">The data was not found.</string>
+    <string name="MsgIsNorRegister">You are not registered. You must create an account.</string>
+    <string name="MsgIncorrectPassword">Incorrect password.</string>
+    <string name="MsgLoginSuccess">Login successful</string>
+    <string name="id_ly">Id</string>
+    <string name="province_ly">Province</string>
+    <string name="TextYes">Yes</string>
+    <string name="TextNo">No</string>
+    <string name="TextTitleDialogQuestion">Question...</string>
+    <string name="MsgCreateAccSuccess">"Account successfully created. "</string>
+    <string name="MsgDuplicated">Error: Duplicate ID</string>
+    <string name="MsgDuplicated2">Error: Username already exists</string>
 </resources>
