@@ -38,7 +38,6 @@ Contiene **utilidades y helpers** para operaciones recurrentes o compartidas ent
 - Creación de los layouts de login y register.
 
 ---
-
 ## 📌 Tercer Avance — Task 5
 
 ### 🧑‍💻 Autor: *Esteban Amores – MediTracker*  
@@ -63,3 +62,28 @@ Se estableció una verificación para comprobar si el **nombre de usuario** ingr
 Se configuró el botón **“Crear cuenta”**, el cual redirige al usuario hacia la pantalla `RegisterActivity`.
 
 Esta vista tiene la funcionalidad exclusiva de **registrar nuevos usuarios**, realizando una **inserción en la lista general de usuarios** dentro de la capa de datos, garantizando así la **persistencia y disponibilidad** de la información para futuros inicios de sesión.
+
+---
+**🗓 Fecha:** 04/11/2025 — 🕐 Hora: 12:27 a.m.
+
+### ✨ Descripción del Avance
+
+Durante este avance se implementó la interfaz principal del apartado de **medicamentos** dentro de la aplicación **MediTracker**, incluyendo la creación de la actividad `MedicationActivity` y su respectivo diseño en XML.
+
+### 🔍 Detalles del Desarrollo
+
+#### ✅ Interfaz de Medicamentos
+
+Se desarrolló la estructura visual y funcional básica para la gestión de medicamentos:
+
+- Se creó la actividad `MedicationActivity` junto con su archivo XML correspondiente.
+- Se implementó el método `showTimePickerDialog`, encargado de mostrar un selector de hora para programar la toma de medicamentos.
+
+#### ⚠️ Pendientes por Implementar
+
+- Lógica completa del **CRUD** para medicamentos (crear, modificar, eliminar).
+- Layouts faltantes que impiden la edición o eliminación desde otras vistas:
+  - Pantalla de **Inicio**
+  - Pantalla de **Calendario**
+  - Pantalla de **Perfil de Usuario**
+---
