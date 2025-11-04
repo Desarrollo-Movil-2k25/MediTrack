@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             if (user != null){
                 Toast.makeText(this,R.string.MsgLoginSuccess, Toast.LENGTH_SHORT).show()
                 cleanScreen()
+                Util.OpenActivity(this, MedicationActivity::class.java)
 
                 // Logica para trasladar a la pantalla de la aplicacion
 
