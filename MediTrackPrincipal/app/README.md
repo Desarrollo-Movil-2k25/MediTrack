@@ -86,4 +86,40 @@ Se desarrolló la estructura visual y funcional básica para la gestión de medi
   - Pantalla de **Inicio**
   - Pantalla de **Calendario**
   - Pantalla de **Perfil de Usuario**
+
 ---
+
+**🗓 Fecha:** 04/11/2025 — 🕐 Hora: 11:38 a.m.
+
+### ✨ Descripción del Avance
+
+Durante este avance se completó la implementación del **CRUD (Create, Read, Update, Delete)** para la gestión de **medicamentos** dentro de la aplicación **MediTracker**, asegurando un flujo funcional y estable en el manejo de registros desde la interfaz de usuario.
+
+### 🔍 Detalles del Desarrollo
+
+#### ✅ Controlador y Lógica de Datos
+
+- Se modifico la clase `MedicationController`, la cual gestiona las operaciones CRUD apoyándose en `MemoryDataManagerMedication`.
+- Se añadió el control de estado `isEditMode` para distinguir entre inserciones nuevas y actualizaciones.
+- Se mejoró la conversión y formateo de fechas y horas (`parseStringToDateModern`, `parseStringToTimeModern`) con soporte para formato AM/PM.
+
+#### 💻 Interfaz de Usuario
+- Se actualizó la vista de registro de medicamentos para permitir:
+  - Validaciones visuales y mensajes `Toast` informativos.
+- Se deshabilitan campos de edición durante el modo **editar** tras realizar una búsqueda (`searchMedication()`).
+
+#### 🧩 Funcionalidades Clave
+- **Agregar medicamento:** con verificación de campos y formato.
+- **Buscar medicamento:** carga automática de datos y modo edición.
+- **Editar medicamento:** permite actualizar registros existentes.
+- **Eliminar medicamento:** disponible desde la interfaz de mantenimiento.
+
+#### ⚠️ Pendientes por Implementar
+- Layouts faltantes que impiden la edición o eliminación desde otras vistas:
+  - Pantalla de **Inicio**
+  - Pantalla de **Calendario**
+  - Pantalla de **Perfil de Usuario**
+- CRUD
+    - El crud respectivo de cada layout faltante.
+---
+
