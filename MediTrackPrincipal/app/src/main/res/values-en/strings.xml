@@ -53,6 +53,13 @@
     <string name="start_date_ly">Fecha de Inicio</string>
     <string name="select_ly">Selecionar</string>
     <string name="end_date_ly">Fecha Fin (Opcional)</string>
+    <string name="txtViewDose_medication">Dosis</string>
+    <string name="exampleDose_medication">Ej: 500mg</string>
+    <string name="MsgCreateMedicationSuccess">Medicamento agregado exitosamente.</string>
+    <string name="MsgNotIsInt">El identificador del medicamento debe de ser un número entero.</string>
+    <string name="MsgNotIsEditMode">No se puede modificar tienes que buscar un medicamento.</string>
+    <string name="MsgNotIsEditMode2">No se puede eliminar tienes que buscar un medicamento.</string>
+    <string name="MsgDeleteSuccess">Dato eliminado exitosamente.</string>
     <string-array name="frequency_options">
         <item>Diaria</item>
         <item>Cada 8 horas</item>

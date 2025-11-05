@@ -8,6 +8,7 @@ import com.example.meditrackprincipal.R
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
@@ -27,7 +28,15 @@ class Util {
                 null
             }
         }
-
+        fun parseStringToTimeModern(timeString: String, pattern: String): LocalTime? {
+            return try {
+                val formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault())
+                LocalTime.parse(timeString, formatter)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+        }
         fun parseStringToDateTimeModern(dateTimeString: String, pattern: String): LocalDateTime? {
             return try {
                 val formatter = DateTimeFormatter.ofPattern(pattern, Locale.getDefault())

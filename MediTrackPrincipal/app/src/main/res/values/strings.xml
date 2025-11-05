@@ -55,12 +55,19 @@
     <string name="exampleNameMedication_medication">Ej: Paracetamol</string>
     <string name="txtViewId_medication">Identificaación del Medicamento</string>
     <string name="exampleDescription_medication">Ej: Para el dolor de cabeza.</string>
-    <string name="txtViewDescription_medication">Descripción</string>
+    <string name="txtViewDescription_medication">Descripción (Opcional)</string>
     <string name="txtViewFrequency_medication">Frecuencia</string>
     <string name="selctTime_ly">Seleccionar hora</string>
     <string name="start_date_ly">Fecha Inicio</string>
     <string name="select_ly">Selecionar</string>
     <string name="end_date_ly">Fecha Fin (Opcional)</string>
+    <string name="txtViewDose_medication">Dosis</string>
+    <string name="exampleDose_medication">Ej: 500mg</string>
+    <string name="MsgCreateMedicationSuccess">Medicamento agregado exitosamente.</string>
+    <string name="MsgNotIsInt">El identificador del medicamento debe de ser un número entero.</string>
+    <string name="MsgNotIsEditMode">No se puede modificar tienes que buscar un medicamento.</string>
+    <string name="MsgNotIsEditMode2">No se puede eliminar tienes que buscar un medicamento.</string>
+    <string name="MsgDeleteSuccess">Dato eliminado exitosamente.</string>
     <string-array name="frequency_options">
         <item>Diaria</item>
         <item>Cada 8 horas</item>

@@ -126,9 +126,7 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                     user.state = txtState.text.toString()
                     user.address = txtAddress.text.toString()
                     userController.addUser(user)
-                    // cleanScreen()
-                    Toast.makeText(this,getString(R.string.MsgCreateAccSuccess),
-                        Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,getString(R.string.MsgCreateAccSuccess),Toast.LENGTH_LONG).show()
                     cleanScreen()
                     Util.OpenActivity(this, MainActivity::class.java)
                 }
@@ -137,7 +135,6 @@ class RegisterActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
                     Toast.LENGTH_LONG).show()
             }
         }catch (e: Exception){
-            // cleanScreen()
             Toast.makeText(this,e.message.toString(), Toast.LENGTH_LONG).show()
             cleanScreen()
         }

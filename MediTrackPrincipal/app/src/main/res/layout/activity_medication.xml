@@ -160,26 +160,71 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:text="@string/txtViewId_medication"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_gravity="start" />
+
+                    <EditText
+                        android:id="@+id/txtId_medication"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_corner2"
+                        android:padding="14dp"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/SearchMedication_button"
+                    android:layout_width="44dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="8dp"
+                    android:background="@android:color/transparent"
+                    app:srcCompat="@android:drawable/ic_search_category_default"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+            </LinearLayout>
+
+            <!-- Dosis -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                android:text="@string/txtViewId_medication"
+                android:text="@string/txtViewDose_medication"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_gravity="start"/>
 
             <EditText
-                android:id="@+id/txtId_medication"
+                android:id="@+id/txtDose_medication"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:hint="@string/exampleDose_medication"
                 android:background="@drawable/rounded_corner2"
                 android:padding="14dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:textSize="18sp"
-                tools:ignore="SpeakableTextPresentCheck" />
+                android:layout_marginBottom="16dp" />
 
             <!-- Nombre -->
             <TextView
@@ -312,15 +357,6 @@
                             android:padding="10dp"
                             android:gravity="center_vertical">
 
-                            <TextView
-                                android:id="@+id/tvStartDate_medication"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/select_ly"
-                                android:textColor="@color/black"
-                                android:textSize="18sp" />
-
                             <ImageButton
                                 android:id="@+id/btnSelectStartDate"
                                 android:layout_width="40dp"
@@ -330,6 +366,14 @@
                                 android:padding="4dp"
                                 app:srcCompat="@android:drawable/ic_menu_my_calendar"
                                 tools:ignore="TouchTargetSizeCheck" />
+
+                            <TextView
+                                android:id="@+id/tvStartDate_medication"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -358,14 +402,7 @@
                             android:padding="10dp"
                             android:gravity="center_vertical">
 
-                            <TextView
-                                android:id="@+id/tvEndDate_medication"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="@string/select_ly"
-                                android:textColor="@color/black"
-                                android:textSize="18sp" />
+
 
                             <ImageButton
                                 android:id="@+id/btnSelectEndDate"
@@ -376,6 +413,14 @@
                                 android:padding="4dp"
                                 app:srcCompat="@android:drawable/ic_menu_my_calendar"
                                 tools:ignore="TouchTargetSizeCheck" />
+                            <TextView
+                                android:id="@+id/tvEndDate_medication"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
