@@ -9,4 +9,5 @@ interface IDataManagerMedication {
     fun getAll(): List<Medication>
     fun getById(id: Int): Medication?
     fun getByName(name: String): Medication?
+
 }

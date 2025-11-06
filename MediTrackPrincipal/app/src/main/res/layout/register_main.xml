@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/register_main"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_and_register_bg"
@@ -40,150 +40,9 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Nombre -->
-            <EditText
-                android:id="@+id/etName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/rounded_corner"
-                android:hint="@string/name_ly"
-                android:inputType="textPersonName"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:textSize="18sp" />
-
-            <!-- Primer apellido -->
-            <EditText
-                android:id="@+id/etFirstLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/lastName1_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="textPersonName"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Segundo apellido -->
-            <EditText
-                android:id="@+id/etSecondLastName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/lastName2_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="textPersonName"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Teléfono -->
-            <EditText
-                android:id="@+id/etPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/phone_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="phone"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Correo -->
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/email_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="textEmailAddress"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Fecha de nacimiento -->
-            <EditText
-                android:id="@+id/etBirthday"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/birthday_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:focusable="false"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Provincia -->
-            <Spinner
-                android:id="@+id/spinner_province"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/rounded_corner"
-                android:entries="@array/province_ly"
-                android:padding="14dp"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"/>
-
-            <!-- Cantón -->
-            <EditText
-                android:id="@+id/etState"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/state_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="textCapWords"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Distrito -->
-            <EditText
-                android:id="@+id/etDistrict"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/distric_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="textCapWords"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Dirección -->
-            <EditText
-                android:id="@+id/etAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/address_ly"
-                android:background="@drawable/rounded_corner"
-                android:padding="16dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white"
-                android:inputType="textMultiLine"
-                android:minLines="2"
-                android:textSize="18sp"
-                android:layout_marginBottom="12dp" />
-
             <!-- Usuario -->
             <EditText
-                android:id="@+id/etUsername"
+                android:id="@+id/txtUsername_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username_ly"
@@ -197,7 +56,7 @@
 
             <!-- Contraseña -->
             <EditText
-                android:id="@+id/etPassword"
+                android:id="@+id/txtPassword_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password_ly"
@@ -209,16 +68,209 @@
                 android:textSize="18sp"
                 android:layout_marginBottom="20dp" />
 
-            <!-- Botón de registrar -->
-            <Button
-                android:id="@+id/btnRegister"
+            <EditText
+                android:id="@+id/txtId_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_ly"
+                android:layout_marginBottom="12dp"
                 android:background="@drawable/rounded_corner"
-                android:textSize="20sp"
+                android:hint="@string/id_ly"
+                android:inputType="textPersonName"
+                android:padding="16dp"
                 android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+
+            <!-- Nombre -->
+            <EditText
+                android:id="@+id/txtName_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/rounded_corner"
+                android:hint="@string/name_ly"
+                android:inputType="textPersonName"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+
+            <!-- Primer apellido -->
+            <EditText
+                android:id="@+id/txtFirstLastName_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lastName1_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPersonName"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Segundo apellido -->
+            <EditText
+                android:id="@+id/txtSecondLastName_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lastName2_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPersonName"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Teléfono -->
+            <EditText
+                android:id="@+id/txtPhone_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/phone_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="phone"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Correo -->
+            <EditText
+                android:id="@+id/txtEmail_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textEmailAddress"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Fecha de nacimiento -->
+            <!--<EditText
+                android:id="@+id/txtBirthday_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/birthday_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:focusable="false"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />-->
+
+            <LinearLayout
+                android:id="@+id/layoutBirthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_corner"
+                android:padding="12dp"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:id="@+id/tvBirthdayLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birthday_ly"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tvBirthdayValue_register"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <ImageButton
+                    android:id="@+id/selectDate_button"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:padding="4dp"
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar"/>
+
+            </LinearLayout>
+
+            <!-- Provincia -->
+            <EditText
+                android:id="@+id/txtProvince_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/province_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textCapWords"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Cantón -->
+            <EditText
+                android:id="@+id/txtState_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/state_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textCapWords"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Distrito -->
+            <EditText
+                android:id="@+id/txtDistrict_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/distric_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textCapWords"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Dirección -->
+            <EditText
+                android:id="@+id/txtAddress_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/address_ly"
+                android:background="@drawable/rounded_corner"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textMultiLine"
+                android:minLines="2"
+                android:textSize="18sp"
+                android:layout_marginBottom="12dp" />
+
+
+
+            <!-- Botón de registrar -->
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_corner"
                 android:padding="14dp"
+                android:text="@string/create_acc_ly"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 app:cornerRadius="10dp" />
 
         </LinearLayout>

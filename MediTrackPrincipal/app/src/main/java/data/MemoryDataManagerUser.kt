@@ -37,4 +37,25 @@ object MemoryDataManagerUser: IDataManagerUser {
             throw e
         }
     }
+
+    override fun getByUserName(userName: String): User? {
+        try {
+            var result = userList.filter {it.toString().trim()==userName.trim()}
+            return if (result.any()) result[0] else null
+        }catch (e: Exception){
+            throw e
+        }
+    }
+
+    override fun login(username: String, password: String): User? {
+        val user = userList.find { it.nameUser.trim() == username.trim() }
+        return when {
+            user == null -> throw Exception("User not found") // No tiene cuenta
+            user.password != password -> throw Exception("Incorrect password")  // Contraseña incorrecta
+            else -> user  // Usuario y contraseña correctos
+        }
+    }
+
+
+
 }

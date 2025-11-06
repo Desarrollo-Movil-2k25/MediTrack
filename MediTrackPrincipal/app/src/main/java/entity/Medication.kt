@@ -13,9 +13,11 @@ class Medication {
     private lateinit var _time: LocalTime
     private lateinit var _startDate: LocalDate
     private var _endDate: LocalDate? = null
-    private var _reminderActive: Boolean = false
+    private var _reminderActive: Boolean? = false
     private var _image: Bitmap? = null
-    private var _taken: Boolean = false
+    private var _taken: Boolean? = false
+
+    constructor()
 
     // Constructor
     constructor(id: Int,name: String, dose: String, description: String?,frequency:
@@ -68,7 +70,7 @@ class Medication {
         get() = _endDate
         set(value) { _endDate = value }
 
-    var reminderActive: Boolean
+    var reminderActive: Boolean?
         get() = _reminderActive
         set(value) { _reminderActive = value }
 
@@ -76,7 +78,7 @@ class Medication {
         get() = _image
         set(value) { _image = value }
 
-    var taken: Boolean
+    var taken: Boolean?
         get() = _taken
         set(value) { _taken = value }
 

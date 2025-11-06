@@ -9,4 +9,6 @@ interface IDataManagerUser {
     fun getAll(): List<User>
     fun getById(id: String): User?
     fun getByFullName(fullName: String): User?
+    fun getByUserName(userName: String): User?
+    fun login(username: String, password: String): User?
 }

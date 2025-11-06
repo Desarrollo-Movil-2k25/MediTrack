@@ -19,4 +19,51 @@
     <string name="state_ly">State</string>
     <string name="distric_ly">Distrito</string>
     <string name="address_ly">Dirección exacta</string>
+    <string name="MsgDataNotFound">The data was not found.</string>
+    <string name="MsgIsNorRegister">You are not registered. You must create an account.</string>
+    <string name="MsgIncorrectPassword">Incorrect password.</string>
+    <string name="MsgLoginSuccess">Login successful</string>
+    <string name="id_ly">Id</string>
+    <string name="province_ly">Province</string>
+    <string name="TextYes">Yes</string>
+    <string name="TextNo">No</string>
+    <string name="TextTitleDialogQuestion">Question...</string>
+    <string name="MsgCreateAccSuccess">"Account successfully created. "</string>
+    <string name="MsgDuplicated">Error: Duplicate ID</string>
+    <string name="MsgDuplicated2">Error: Username already exists</string>
+    <string name="medication_ly">Medicamentos</string>
+    <string name="save_content_ly">Save</string>
+    <string name="modify_content_ly">Modify</string>
+    <string name="delete_content_ly">Delete</string>
+    <string name="cancel_content_ly">Cancel</string>
+    <string name="back_content_ly">Volver</string>
+    <string name="home_content_ly">Home</string>
+    <string name="person_content_ly">Profile</string>
+    <string name="calendar_content_ly">Calendar</string>
+    <string name="camara">Cámara</string>
+    <string name="gallery">Galería</string>
+    <string name="txtViewImg_medication">Imagen(Opcional)</string>
+    <string name="txtViewName_medication">Nombre</string>
+    <string name="exampleNameMedication_medication">Ej: Paracetamol</string>
+    <string name="txtViewId_medication">Identificaación del Medicamento</string>
+    <string name="exampleDescription_medication">Ej: Para el dolor de cabeza.</string>
+    <string name="txtViewDescription_medication">"Descripción  "</string>
+    <string name="txtViewFrequency_medication">Frecuencia</string>
+    <string name="selctTime_ly">Seleccionar hora</string>
+    <string name="start_date_ly">Fecha de Inicio</string>
+    <string name="select_ly">Selecionar</string>
+    <string name="end_date_ly">Fecha Fin (Opcional)</string>
+    <string name="txtViewDose_medication">Dosis</string>
+    <string name="exampleDose_medication">Ej: 500mg</string>
+    <string name="MsgCreateMedicationSuccess">Medicamento agregado exitosamente.</string>
+    <string name="MsgNotIsInt">El identificador del medicamento debe de ser un número entero.</string>
+    <string name="MsgNotIsEditMode">No se puede modificar tienes que buscar un medicamento.</string>
+    <string name="MsgNotIsEditMode2">No se puede eliminar tienes que buscar un medicamento.</string>
+    <string name="MsgDeleteSuccess">Dato eliminado exitosamente.</string>
+    <string-array name="frequency_options">
+        <item>Diaria</item>
+        <item>Cada 8 horas</item>
+        <item>Cada 12 horas</item>
+        <item>Semanal</item>
+    </string-array>
 </resources>
