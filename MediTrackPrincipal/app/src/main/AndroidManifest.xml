@@ -13,9 +13,11 @@
         android:theme="@style/Theme.MediTrackPrincipal">
         <activity
             android:name=".MedicationActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -27,5 +29,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
