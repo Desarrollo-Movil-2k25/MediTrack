@@ -39,10 +39,9 @@ object MemoryDataManagerUser: IDataManagerUser {
     }
 
     override fun getByUserName(userName: String): User? {
-        try {
-            var result = userList.filter {it.toString().trim()==userName.trim()}
-            return if (result.any()) result[0] else null
-        }catch (e: Exception){
+        return try {
+            userList.firstOrNull { it.nameUser.trim() == userName.trim() }
+        } catch (e: Exception) {
             throw e
         }
     }

@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import controller.MedicationController
 import entity.Medication
+import util.SessionManager
 import util.Util
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -25,6 +26,7 @@ import java.util.Calendar
 import java.util.Locale
 
 class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+    private val calendar = Calendar.getInstance()
     private lateinit var medicationController: MedicationController
     private lateinit var txtId: EditText
     private lateinit var txtDose: EditText
@@ -36,9 +38,9 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     private lateinit var lbEndDate: TextView
     private var isEditMode: Boolean=false
     private var selectingStartDate = true
-    private var year = 0
-    private var month = 0
-    private var day = 0
+    private var year = calendar.get(Calendar.YEAR)
+    private var month = calendar.get(Calendar.MONTH)
+    private var day = calendar.get(Calendar.DAY_OF_MONTH)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +72,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             selectingStartDate = false
             showDatePickerDialog()
         })
+
         val txtTime = findViewById<EditText>(R.id.txtTime_medication)
         txtTime.setOnClickListener {
             showTimePickerDialog(txtTime)
@@ -77,7 +80,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
 
         val btnSave = findViewById<ImageButton>(R.id.save_button)
         btnSave.setOnClickListener(View.OnClickListener{view ->
-            saveMedication()
+            Util.showDialogCondition(this,getString(R.string.MsgSaveMedication),::saveMedication)
         })
 
         val btnCancel = findViewById<ImageButton>(R.id.cancel_button)
@@ -89,10 +92,11 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         btnSearch.setOnClickListener(View.OnClickListener{view ->
             searchMedication(txtId.text.toString().trim().toInt())
         })
+
         val btnUpdate = findViewById<ImageButton>(R.id.edit_button)
         btnUpdate.setOnClickListener(View.OnClickListener{view ->
             if (isEditMode){
-                saveMedication()
+                Util.showDialogCondition(this,getString(R.string.MsgUpdateMedication),::saveMedication)
             }else{
                 Toast.makeText(this, R.string.MsgNotIsEditMode, Toast.LENGTH_LONG).show()
             }
@@ -101,11 +105,27 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         val btnDelete = findViewById<ImageButton>(R.id.delete_button)
         btnDelete.setOnClickListener(View.OnClickListener{view ->
             if (isEditMode){
-                deleteMedication()
+                Util.showDialogCondition(this,getString(R.string.MsgDeleteMedication),::deleteMedication)
             }else{
                 Toast.makeText(this, R.string.MsgNotIsEditMode2, Toast.LENGTH_LONG).show()
             }
         })
+
+        val btnHome = findViewById<ImageButton>(R.id.home_button)
+        btnHome.setOnClickListener(View.OnClickListener{view ->
+            Util.OpenActivity(this, HomeActivity::class.java)
+        })
+
+        val btnMedication = findViewById<ImageButton>(R.id.medication_button)
+        btnMedication.setOnClickListener(View.OnClickListener{view ->
+            Util.OpenActivity(this, MedicationActivity::class.java)
+        })
+
+        val btnProfile = findViewById<ImageButton>(R.id.person_button)
+        btnProfile.setOnClickListener(View.OnClickListener { view ->
+            Util.OpenActivity(this, ProfileActivity::class.java)
+        })
+
     }
     private fun getDateFormatString(dayOfMonth: Int, monthValue: Int,yearValue: Int): String{
         return "${if (dayOfMonth < 10) "0" else "" }$dayOfMonth/${if (monthValue < 10) "0" else "" }$monthValue/$yearValue"
@@ -164,10 +184,14 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     private fun saveMedication() {
         try {
             val medication = Medication()
+
+            val session = SessionManager(this)
+            val currentUser = session.getUsername()
+
             val btnSelectStartDate = findViewById<ImageButton>(R.id.btnSelectStartDate)
             if (invalidationData()) {
                 // Validar duplicados
-                if (medicationController.getMedicationById(txtId.text.toString().trim().toInt()) != null && !isEditMode) {
+                if (medicationController.getMedicationById(txtId.text.toString().trim().toInt(),currentUser) != null && !isEditMode) {
                     Toast.makeText(this, getString(R.string.MsgDuplicated), Toast.LENGTH_LONG).show()
                     return
                 }
@@ -204,6 +228,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 medication.reminderActive = true
                 medication.taken = false
                 medication.image = null
+                medication.ownerUser = currentUser
                 if (!isEditMode){
                     medicationController.addMedication(medication)
                 }else
@@ -227,8 +252,10 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             return
         }
         try {
+            val session = SessionManager(this)
+            val currentUser = session.getUsername()
             val btnSelectStartDate = findViewById<ImageButton>(R.id.btnSelectStartDate)
-            val medication = medicationController.getMedicationById(id)
+            val medication = medicationController.getMedicationById(id,currentUser)
             if (medication != null) {
                 isEditMode = true
                 txtId.setText(medication.id.toString())
@@ -270,12 +297,15 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     }
     private fun deleteMedication() {
         try {
-            medicationController.removeMedication(txtId.text.toString().trim().toInt())
+            val session = SessionManager(this)
+            val currentUser = session.getUsername()
+            medicationController.removeMedication(txtId.text.toString().trim().toInt(),currentUser)
             cleanScreen()
             Toast.makeText(
                 this, getString(R.string.MsgDeleteSuccess),
                 Toast.LENGTH_LONG
             ).show()
+            txtId.isEnabled = true
         }catch (e: Exception){
             Toast.makeText(
                 this, getString(R.string.ErrorMsgRemove),

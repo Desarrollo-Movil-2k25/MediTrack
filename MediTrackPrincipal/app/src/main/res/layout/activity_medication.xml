@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_and_register_bg"
     android:padding="16dp"
     tools:context=".MedicationActivity">
     <!-- Encabezado -->
@@ -18,7 +17,7 @@
         android:background="#4180ab"
         android:gravity="center_vertical">
 
-        <!-- Botón Volver -->
+        <!-- Botón Volver
         <ImageButton
             android:id="@+id/back_button"
             android:layout_width="40dp"
@@ -28,7 +27,7 @@
             android:contentDescription="@string/back_content_ly"
             app:srcCompat="@drawable/arrow_back"
             app:tint="#ffffff"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck" />-->
 
         <!-- Título -->
         <TextView
@@ -38,7 +37,7 @@
             android:layout_weight="1"
             android:text="@string/medication_ly"
             android:textColor="#ffffff"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:gravity="center" />
 
@@ -426,16 +425,17 @@
                                 android:layout_weight="1"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
-
                         </LinearLayout>
+
                     </LinearLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <!-- Fin Contenedor desplazable -->
 
-    <!-- Footer -->
     <!-- Footer -->
     <LinearLayout
         android:id="@+id/footerLayout"
@@ -482,18 +482,18 @@
             android:gravity="center">
 
             <ImageButton
-                android:id="@+id/calendar_button"
+                android:id="@+id/medication_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
-                app:srcCompat="@drawable/calendar"
+                app:srcCompat="@drawable/add_circle"
                 app:tint="#ffffff"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/calendar_content_ly"
+                android:text="@string/medication_content_ly"
                 android:textColor="#ffffff"
                 android:textSize="14sp" />
         </LinearLayout>

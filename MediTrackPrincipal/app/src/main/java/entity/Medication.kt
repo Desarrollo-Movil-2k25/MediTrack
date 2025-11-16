@@ -16,13 +16,14 @@ class Medication {
     private var _reminderActive: Boolean? = false
     private var _image: Bitmap? = null
     private var _taken: Boolean? = false
+    private var _ownerUser: String = ""
 
     constructor()
 
     // Constructor
     constructor(id: Int,name: String, dose: String, description: String?,frequency:
                 String,time: LocalTime, startDate: LocalDate, endDate: LocalDate?,
-                reminderActive: Boolean, image: Bitmap?,taken: Boolean = false
+                reminderActive: Boolean, image: Bitmap?,taken: Boolean = false, ownerUser: String
     ) {
         this._id = id
         this._name = name
@@ -35,6 +36,7 @@ class Medication {
         this._reminderActive = reminderActive
         this._image = image
         this._taken = taken
+        this._ownerUser = ownerUser
     }
 
     // Getters y Setters
@@ -81,6 +83,11 @@ class Medication {
     var taken: Boolean?
         get() = _taken
         set(value) { _taken = value }
+
+    var ownerUser: String
+        get() = _ownerUser
+        set(value) { _ownerUser = value }
+
 
     // toString
     override fun toString(): String {

@@ -68,6 +68,11 @@
     <string name="MsgNotIsEditMode">No se puede modificar tienes que buscar un medicamento.</string>
     <string name="MsgNotIsEditMode2">No se puede eliminar tienes que buscar un medicamento.</string>
     <string name="MsgDeleteSuccess">Dato eliminado exitosamente.</string>
+    <string name="medication_content_ly">Medicamentos</string>
+    <string name="logout_content_ly">Cerrar Sesión</string>
+    <string name="MsgDeleteMedication">Deseas eliminar este medicamento.</string>
+    <string name="MsgSaveMedication">Deseas crear este medicamento.</string>
+    <string name="MsgUpdateMedication">Deseas modificar este medicamento.</string>
     <string-array name="frequency_options">
         <item>Diaria</item>
         <item>Cada 8 horas</item>
