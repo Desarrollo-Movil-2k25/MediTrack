@@ -25,3 +25,8 @@ Proyecto académico para el curso de **Desarrollo de Aplicaciones Móviles**.
 
 # MackUps
 ![MackUp](assets/Wireframe-MediTrack.png)
+
+# Paletas de Colores
+- https://paletadecolores.com.mx/paleta/4180ab/ffffff/8ab3cf/bdd1de/e4ebf0
+- https://paletadecolores.com.mx/paleta/3a3132/0f4571/386dbd/009ddd/05d3f8
+- https://paletadecolores.com.mx/paleta/cecece/a2a2a2/777777/4b4b4b/202020

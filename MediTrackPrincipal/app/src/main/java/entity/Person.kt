@@ -8,13 +8,13 @@ open class Person {
     private var _name: String=""
     private var _fLastName: String=""
     private var _sLastName: String=""
-    private var _phone: Int=0
+    private var _phone: Int?=0
     private var _email: String=""
-    private lateinit var _birthday: LocalDate
-    private lateinit var _province: Province
-    private var _state: String=""
-    private var _district: String=""
-    private var _address: String = ""
+    private var _birthday: LocalDate?=null
+    private var _province: Province?=null
+    private var _state: String?=""
+    private var _district: String?=""
+    private var _address: String? = ""
 
     // Constructor vacío
     constructor()
@@ -53,7 +53,7 @@ open class Person {
         get() = this._sLastName
         set(value) {this._sLastName = value}
 
-    var phone: Int
+    var phone: Int?
         get() = this._phone
         set(value) {this._phone = value}
 
@@ -61,23 +61,23 @@ open class Person {
         get() = this._email
         set(value) {this._email = value}
 
-    var birthday: LocalDate
+    var birthday: LocalDate?
         get() = this._birthday
         set(value) {this._birthday = value}
 
-    var province: Province
+    var province: Province?
         get() = this._province
         set(value) { this._province = value}
 
-    var state: String
+    var state: String?
         get() = this._state
         set(value) { this._state = value}
 
-    var district: String
+    var district: String?
         get() = this._district
         set(value) { this._district = value}
 
-    var address: String
+    var address: String?
         get() = this._address
         set(value) { this._address = value}
 
