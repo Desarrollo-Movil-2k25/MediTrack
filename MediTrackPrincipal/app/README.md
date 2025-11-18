@@ -226,8 +226,32 @@ Durante este avance se trabajó en varias áreas clave del proyecto **MediTracke
 ---
 
 ### 🧩 Conclusión
-
 El proyecto avanzó considerablemente, fortaleciéndose en áreas críticas como manejo de sesión, experiencia de usuario, estabilidad del CRUD y diseño visual. Las funcionalidades esenciales están sólidas y listas para integrar las vistas faltantes y mejorar la persistencia de datos.
 
+# 🗓 Fecha: 18/11/2025 — 🕐 Hora: 12:34 a.m.
+
+## ✨ Resumen del Avance
+
+Hoy se completaron dos áreas principales del proyecto **MediTracker**:  
+la **actualización de perfil del usuario** y la **integración de imágenes en medicamentos**, además de solucionar fallos internos en el manejo de datos.
+
+---
+
+## 🔧 Cambios Realizados
+
+### ✅ 1. Actualización de Perfil
+- Se implementó la edición completa de datos del usuario en `ProfileActivity`.
+- Corrección de valores nulos y construcción adecuada del objeto `User`.
+- Se agregó trazabilidad con logs para depuración.
+- Se solucionó el problema donde el perfil no se actualizaba visualmente.
+
+### 📸 3. Manejo de Imágenes en Medicamentos
+- Integración completa de fotos desde **cámara** y **galería**.
+- Visualización y carga de imagen al editar un medicamento.
+---
+
+## 🧩 Conclusión
+
+El sistema ahora permite **actualizar el perfil**, manejar **imágenes en medicamentos** y gestiona correctamente la actualización de usuarios en memoria, mejorando la estabilidad y funcionalidad general del proyecto.
 
 

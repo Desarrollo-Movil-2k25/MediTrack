@@ -1,17 +1,27 @@
 package com.example.meditrackprincipal
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -41,6 +51,9 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     private var year = calendar.get(Calendar.YEAR)
     private var month = calendar.get(Calendar.MONTH)
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
+    private lateinit var imgPhoto: ImageView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,71 +73,84 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         txtTime = findViewById(R.id.txtTime_medication)
         lbStartDate = findViewById(R.id.tvStartDate_medication)
         lbEndDate = findViewById(R.id.tvEndDate_medication)
+        imgPhoto = findViewById(R.id.imgMedication)
 
         val btnSelectStartDate = findViewById<ImageButton>(R.id.btnSelectStartDate)
-        btnSelectStartDate.setOnClickListener(View.OnClickListener{view ->
+        btnSelectStartDate.setOnClickListener { view ->
             selectingStartDate = true
             showDatePickerDialog()
-        })
+        }
 
         val btnSelectEndDate = findViewById<ImageButton>(R.id.btnSelectEndDate)
-        btnSelectEndDate.setOnClickListener(View.OnClickListener{view ->
+        btnSelectEndDate.setOnClickListener { view ->
             selectingStartDate = false
             showDatePickerDialog()
-        })
+        }
 
         val txtTime = findViewById<EditText>(R.id.txtTime_medication)
         txtTime.setOnClickListener {
             showTimePickerDialog(txtTime)
         }
 
-        val btnSave = findViewById<ImageButton>(R.id.save_button)
-        btnSave.setOnClickListener(View.OnClickListener{view ->
-            Util.showDialogCondition(this,getString(R.string.MsgSaveMedication),::saveMedication)
-        })
 
         val btnCancel = findViewById<ImageButton>(R.id.cancel_button)
-        btnCancel.setOnClickListener(View.OnClickListener{view ->
+        btnCancel.setOnClickListener { view ->
             cleanScreen()
-        })
+        }
 
         val btnSearch = findViewById<ImageButton>(R.id.SearchMedication_button)
-        btnSearch.setOnClickListener(View.OnClickListener{view ->
+        btnSearch.setOnClickListener { view ->
             searchMedication(txtId.text.toString().trim().toInt())
-        })
+        }
+
+        val btnSave = findViewById<ImageButton>(R.id.save_button)
+        btnSave.setOnClickListener { view ->
+            Util.showDialogCondition(this, getString(R.string.MsgSaveMedication), ::saveMedication)
+        }
 
         val btnUpdate = findViewById<ImageButton>(R.id.edit_button)
-        btnUpdate.setOnClickListener(View.OnClickListener{view ->
-            if (isEditMode){
-                Util.showDialogCondition(this,getString(R.string.MsgUpdateMedication),::saveMedication)
-            }else{
+        btnUpdate.setOnClickListener { view ->
+            if (isEditMode) {
+                Util.showDialogCondition(this, getString(R.string.MsgUpdateMedication), ::saveMedication)
+            } else {
                 Toast.makeText(this, R.string.MsgNotIsEditMode, Toast.LENGTH_LONG).show()
             }
 
-        })
+        }
+
         val btnDelete = findViewById<ImageButton>(R.id.delete_button)
-        btnDelete.setOnClickListener(View.OnClickListener{view ->
-            if (isEditMode){
-                Util.showDialogCondition(this,getString(R.string.MsgDeleteMedication),::deleteMedication)
-            }else{
+        btnDelete.setOnClickListener { view ->
+            if (isEditMode) {
+                Util.showDialogCondition(this, getString(R.string.MsgDeleteMedication), ::deleteMedication)
+            } else {
                 Toast.makeText(this, R.string.MsgNotIsEditMode2, Toast.LENGTH_LONG).show()
             }
-        })
+        }
+
+        val btnCamera = findViewById<Button>(R.id.btnCamera_medication)
+        btnCamera.setOnClickListener { view ->
+            takePhoto()
+        }
+
+        val btnGallery = findViewById<Button>(R.id.btnGallery_medication)
+        btnGallery.setOnClickListener { view ->
+            selectPhoto()
+        }
 
         val btnHome = findViewById<ImageButton>(R.id.home_button)
-        btnHome.setOnClickListener(View.OnClickListener{view ->
+        btnHome.setOnClickListener { view ->
             Util.OpenActivity(this, HomeActivity::class.java)
-        })
+        }
 
         val btnMedication = findViewById<ImageButton>(R.id.medication_button)
-        btnMedication.setOnClickListener(View.OnClickListener{view ->
+        btnMedication.setOnClickListener { view ->
             Util.OpenActivity(this, MedicationActivity::class.java)
-        })
+        }
 
         val btnProfile = findViewById<ImageButton>(R.id.person_button)
-        btnProfile.setOnClickListener(View.OnClickListener { view ->
+        btnProfile.setOnClickListener { view ->
             Util.OpenActivity(this, ProfileActivity::class.java)
-        })
+        }
 
     }
     private fun getDateFormatString(dayOfMonth: Int, monthValue: Int,yearValue: Int): String{
@@ -184,7 +210,6 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     private fun saveMedication() {
         try {
             val medication = Medication()
-
             val session = SessionManager(this)
             val currentUser = session.getUsername()
 
@@ -227,7 +252,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 }
                 medication.reminderActive = true
                 medication.taken = false
-                medication.image = null
+                medication.image = (imgPhoto.drawable as BitmapDrawable).bitmap
                 medication.ownerUser = currentUser
                 if (!isEditMode){
                     medicationController.addMedication(medication)
@@ -263,6 +288,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 txtDose.setText(medication.dose)
                 txtName.setText(medication.name)
                 txtDescription.setText(medication.description ?: "")
+                imgPhoto.setImageBitmap(medication.image)
                 val frequencyAdapter = ArrayAdapter.createFromResource(
                     this,
                     R.array.frequency_options,
@@ -323,5 +349,33 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         txtTime.setText("")
         lbStartDate.text = ""
         lbEndDate.text = ""
+        imgPhoto.setImageBitmap(null)
     }
+    private val cameraPreviewLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap: Bitmap? ->
+        if (bitmap != null) {
+            imgPhoto.setImageBitmap(bitmap)
+        } else {
+            // Image capture failed or was cancelled
+        }
+    }
+    private val selectImageLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            // Handle the selected image URI here
+            data?.data?.let { imageUri ->
+                imgPhoto.setImageURI(imageUri)
+            }
+        }
+    }
+    private fun takePhoto() {
+        cameraPreviewLauncher.launch(null)
+    }
+    private fun selectPhoto() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*")
+        selectImageLauncher.launch(intent)
+    }
+
+
+
 }

@@ -23,7 +23,8 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:background="@drawable/card_background"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:layout_margin="16dp">
 
             <!-- Imagen de encabezado -->
             <ImageView
@@ -245,6 +246,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginTop="1dp"
+                android:layout_marginBottom="10dp"
                 android:backgroundTint="#4180ab"
                 android:text="@string/create_acc_ly"
                 android:textColor="#000000"

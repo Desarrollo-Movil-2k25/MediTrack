@@ -73,6 +73,9 @@
     <string name="MsgDeleteMedication">Deseas eliminar este medicamento.</string>
     <string name="MsgSaveMedication">Deseas crear este medicamento.</string>
     <string name="MsgUpdateMedication">Deseas modificar este medicamento.</string>
+    <string name="imgView_ly">Imagen del medicamento</string>
+    <string name="MsgUpdateProfileSuccess">Perfil actualizado correctamente</string>
+    <string name="MsgUpdateProfile">Deseas actualizar tu perfil?</string>
     <string-array name="frequency_options">
         <item>Diaria</item>
         <item>Cada 8 horas</item>

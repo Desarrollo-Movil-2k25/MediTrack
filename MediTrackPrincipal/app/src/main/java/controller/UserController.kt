@@ -46,7 +46,6 @@ class UserController {
         }
     }
 
-    // ******
     fun getAllUsers(): List<User> {
         try {
             return dataManager.getAll()

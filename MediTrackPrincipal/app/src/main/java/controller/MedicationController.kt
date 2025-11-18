@@ -45,7 +45,6 @@ class MedicationController {
         }
     }
 
-    // ******
     fun getAllMedications(): List<Medication> {
         try {
             return dataManager.getAll()

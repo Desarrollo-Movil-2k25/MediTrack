@@ -2,16 +2,19 @@ package com.example.meditrackprincipal
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import controller.UserController
+import entity.User
 import util.SessionManager
 import util.Util
 
@@ -48,33 +51,74 @@ class ProfileActivity : AppCompatActivity() {
         txtSecondLastName = findViewById(R.id.txtSecondLastName_profile)
         tvProfileUser = findViewById(R.id.tvProfileUser)
 
-        // Cargar datos del usuario automáticamente
         val username = sessionManager.getUsername()
         tvProfileUser.text = username
         searchUser(username)
 
         val btnUpdateProfile = findViewById<Button>(R.id.btnUpdateProfile)
+        btnUpdateProfile.setOnClickListener { view ->
+            val username = sessionManager.getUsername()
+            Util.showDialogCondition(
+                this,
+                getString(R.string.MsgUpdateProfile)
+            ) {
+                updateProfile(username)
+            }
+        }
 
         val btnLogout = findViewById<Button>(R.id.btnLogout)
-        btnLogout.setOnClickListener(View.OnClickListener { view ->
+        btnLogout.setOnClickListener { view ->
             logout()
-        })
+        }
 
         val btnHome = findViewById<ImageButton>(R.id.home_button)
-        btnHome.setOnClickListener(View.OnClickListener{view ->
+        btnHome.setOnClickListener { view ->
             Util.OpenActivity(this, HomeActivity::class.java)
-        })
+        }
 
         val btnMedication = findViewById<ImageButton>(R.id.medication_button)
-        btnMedication.setOnClickListener(View.OnClickListener{view ->
+        btnMedication.setOnClickListener { view ->
             Util.OpenActivity(this, MedicationActivity::class.java)
-        })
+        }
 
         val btnProfile = findViewById<ImageButton>(R.id.person_button)
-        btnProfile.setOnClickListener(View.OnClickListener { view ->
+        btnProfile.setOnClickListener { view ->
             Util.OpenActivity(this, ProfileActivity::class.java)
-        })
+        }
     }
+
+    private fun updateProfile(username: String) {
+        try {
+            if (username.isEmpty()) return
+            val userGet = userController.getUserByUserName(username)
+            if (userGet != null) {
+                val user = User()
+                user.nameUser = userGet.nameUser
+                user.password = userGet.password
+                user.id = userGet.id
+                user.name = txtName.text.toString()
+                user.fLastName = txtFirstLastName.text.toString()
+                user.sLastName = txtSecondLastName.text.toString()
+                user.email = txtEmail.text.toString()
+                user.phone = null
+                user.birthday = null
+                user.province = null
+                user.district = null
+                user.state = null
+                user.address = null
+                userController.updateUser(user)
+                Toast.makeText(
+                    this,
+                    getString(R.string.MsgUpdateProfileSuccess),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "ERROR: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+    }
+
     private fun searchUser(username: String) {
         try {
             if (username.isEmpty()) return
