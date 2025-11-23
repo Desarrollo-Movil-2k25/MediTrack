@@ -122,4 +122,136 @@ Durante este avance se completó la implementación del **CRUD (Create, Read, Up
 - CRUD
     - El crud respectivo de cada layout faltante.
 ---
+# **🗓 Fecha:** 16/11/2025 — 🕐 Hora: 2:16 a.m.
+
+### ✨ Descripción del Avance
+
+Durante este avance se trabajó en varias áreas clave del proyecto **MediTracker**, abordando mejoras en la autenticación, la interfaz de usuario, la gestión interna de datos y la experiencia general de navegación del usuario. También se solucionaron problemas funcionales importantes relacionados con el manejo de medicamentos por usuario.
+
+---
+
+### 🔍 Detalles del Desarrollo
+
+#### ✅ **1. Lógica de Inicio de Sesión y Manejo de Sesión**
+- Se implementó la clase `SessionManager` para almacenar y recuperar el usuario actual.
+- Integración completa del `SessionManager` con `LoginActivity`, `MedicationActivity`, `HomeActivity` y `ProfileActivity`.
+- El flujo de sesión ahora permite:
+  - Guardar el usuario logueado.
+  - Cargar automáticamente su información en pantallas relacionadas.
+  - Cerrar sesión limpiando completamente el historial de actividad.
+
+---
+
+#### 🎨 **2. Reordenamiento de Colores y Mejora Visual de Layouts**
+- Se reorganizó la paleta de colores base utilizando los tonos:
+  - Azul principal `#4180ab`
+  - Azul claro `#8ab3cf`
+  - Celeste grisáceo `#bdd1de`
+  - Fondo claro `#e4ebf0`
+- Se mejoraron los layouts principales:
+  - Login
+  - Registro
+  - Perfil
+  - Medicamentos
+- Se incorporaron nuevos fondos degradados, tarjetas estilizadas y bordes redondeados.
+
+---
+
+#### 🧩 **3. Solución de Problemas Críticos en CRUD de Medicamentos por Usuario**
+- Se corrigió un error donde modificar un medicamento de un usuario eliminaba medicamentos de otros usuarios, debido a que el sistema filtraba solo por `id`.
+- Se añadió el atributo `ownerUser` en la clase `Medication`.
+- Se actualizaron las funciones:
+  - `add()`
+  - `update()`
+  - `remove()`
+  - `getById()`
+
+  Para trabajar con la combinación `id + ownerUser` y evitar conflictos entre usuarios.
+
+---
+
+#### 💻 **4. Perfil de Usuario**
+- Se creó la pantalla `ProfileActivity` con carga automática del usuario actual.
+- Se implementó:
+  - Búsqueda del usuario por nombre.
+  - Visualización de sus datos personales.
+  - Botón funcional para "Cerrar Sesión".
+- Se ajustó la navegación mediante el footer.
+- Se dejó preparado el entorno para la futura funcionalidad de **actualización de datos del usuario**.
+
+---
+
+#### 🗃️ **5. RecyclerView en HomeActivity**
+- Se corrigió la estructura del RecyclerView que anteriormente no mostraba elementos debido a una declaración incorrecta.
+- Ahora se muestra correctamente entre el header y el footer.
+- Se dejó listo para conectar el adaptador y mostrar medicamentos asociados al usuario.
+
+---
+
+#### 🖼️ **6. Imagen del Medicamento**
+- Se preparó la estructura visual para soportar:
+  - Selección de foto desde la cámara.
+  - Selección desde la galería.
+  - Vista previa de imagen.
+- Falta implementar la lógica funcional para almacenar y mostrar imágenes reales.
+
+---
+
+#### 📅 **7. Selector de Fecha (DatePicker) Mejorado**
+- Se corrigió un error donde el selector de fecha mostraba el año 1900.
+- Se ajustó para que:
+  - Abra en la fecha actual.
+  - Recuerde la última fecha seleccionada.
+- Se mejoró el formateo de fechas para mayor claridad.
+
+---
+
+### ⚠️ Pendientes por Implementar
+
+#### 📌 **Interfaz**
+- Completar las pantallas:
+  - **Inicio** (RecyclerView con CRUD completo)
+  - **Calendario**
+  - **Perfil** (actualizar datos)
+- Implementar vista detallada del medicamento (opcional).
+
+#### 📌 **CRUD Adicional**
+- Implementar CRUD del usuario (actualizar datos personales).
+- CRUD para la pantalla de inicio y calendario.
+
+#### 📌 **Imágenes**
+- Guardar imágenes reales en memoria.
+- Mostrar miniaturas en el RecyclerView.
+
+---
+
+### 🧩 Conclusión
+El proyecto avanzó considerablemente, fortaleciéndose en áreas críticas como manejo de sesión, experiencia de usuario, estabilidad del CRUD y diseño visual. Las funcionalidades esenciales están sólidas y listas para integrar las vistas faltantes y mejorar la persistencia de datos.
+
+# 🗓 Fecha: 18/11/2025 — 🕐 Hora: 12:34 a.m.
+
+## ✨ Resumen del Avance
+
+Hoy se completaron dos áreas principales del proyecto **MediTracker**:  
+la **actualización de perfil del usuario** y la **integración de imágenes en medicamentos**, además de solucionar fallos internos en el manejo de datos.
+
+---
+
+## 🔧 Cambios Realizados
+
+### ✅ 1. Actualización de Perfil
+- Se implementó la edición completa de datos del usuario en `ProfileActivity`.
+- Corrección de valores nulos y construcción adecuada del objeto `User`.
+- Se agregó trazabilidad con logs para depuración.
+- Se solucionó el problema donde el perfil no se actualizaba visualmente.
+
+### 📸 3. Manejo de Imágenes en Medicamentos
+- Integración completa de fotos desde **cámara** y **galería**.
+- Visualización y carga de imagen al editar un medicamento.
+---
+
+## 🧩 Conclusión
+
+El sistema ahora permite **actualizar el perfil**, manejar **imágenes en medicamentos** y gestiona correctamente la actualización de usuarios en memoria, mejorando la estabilidad y funcionalidad general del proyecto.
+
 

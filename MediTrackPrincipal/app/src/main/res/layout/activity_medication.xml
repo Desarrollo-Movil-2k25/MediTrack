@@ -14,10 +14,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="@color/design_default_color_primary_variant"
+        android:background="#4180ab"
         android:gravity="center_vertical">
 
-        <!-- Botón Volver -->
+        <!-- Botón Volver
         <ImageButton
             android:id="@+id/back_button"
             android:layout_width="40dp"
@@ -25,9 +25,9 @@
             android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/back_content_ly"
-            android:src="@drawable/arrow_back"
-            android:textColor="@color/white"
-            tools:ignore="TouchTargetSizeCheck" />
+            app:srcCompat="@drawable/arrow_back"
+            app:tint="#ffffff"
+            tools:ignore="TouchTargetSizeCheck" />-->
 
         <!-- Título -->
         <TextView
@@ -36,52 +36,50 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/medication_ly"
-            android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
             android:textStyle="bold"
             android:gravity="center" />
 
-        <!-- Botón Guardar -->
+        <!-- Botones superiores -->
         <ImageButton
             android:id="@+id/save_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/save_content_ly"
-            android:src="@drawable/save"
-            android:textColor="@color/white"
-            tools:ignore="TouchTargetSizeCheck" />
-        <!-- Botón Modificar -->
+            app:srcCompat="@drawable/save"
+            app:tint="#ffffff"
+            tools:ignore="TouchTargetSizeCheck"/>
+
         <ImageButton
             android:id="@+id/edit_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/modify_content_ly"
-            android:src="@drawable/modify"
-            android:textColor="@color/white"
+            app:srcCompat="@drawable/modify"
+            app:tint="#ffffff"
             tools:ignore="TouchTargetSizeCheck" />
-        <!-- Botón Eliminar -->
+
         <ImageButton
             android:id="@+id/delete_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/delete_content_ly"
-            android:src="@drawable/delete"
-            android:textColor="@color/white"
+            app:srcCompat="@drawable/delete"
+            app:tint="#ffffff"
             tools:ignore="TouchTargetSizeCheck" />
-        <!-- Botón Cancelar -->
+
         <ImageButton
             android:id="@+id/cancel_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/cancel_content_ly"
-            android:src="@drawable/cancel"
-            android:textColor="@color/white"
+            app:srcCompat="@drawable/cancel"
+            app:tint="#ffffff"
             tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
     <!-- Fin Encabezado -->
@@ -93,6 +91,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/headerLayout"
         android:layout_above="@id/footerLayout"
+        android:fitsSystemWindows="true"
+        android:scrollbarStyle="outsideOverlay"
         android:fillViewport="true">
 
         <LinearLayout
@@ -102,22 +102,22 @@
             android:padding="16dp"
             android:gravity="center_horizontal">
 
-            <!-- Imagen del medicamento
+            <!-- Imagen del medicamento-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Imagen del medicamento"
+                android:text="@string/imgView_ly"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:layout_marginBottom="8dp" />
+                android:layout_marginBottom="8dp"
+                android:gravity="start"/>
             <ImageView
                 android:id="@+id/imgMedication"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:src=""
                 android:background="@drawable/rounded_corner"
                 android:scaleType="centerCrop"
-                android:layout_marginBottom="12dp" />-->
+                android:layout_marginBottom="12dp" />
             <!--Img-->
             <TextView
                 android:layout_width="wrap_content"
@@ -128,8 +128,6 @@
                 android:layout_marginBottom="8dp"
                 android:layout_gravity="start"/>
 
-            <!--Fin Img-->
-            <!-- ID -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,12 +137,14 @@
 
                 <Button
                     android:id="@+id/btnCamera_medication"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/design_default_color_primary"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:drawableTop="@drawable/photo_camera"
+                    android:backgroundTint="#4180ab"
                     android:text="@string/camara"
-                    android:textColor="@color/white" />
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="12dp" />
 
                 <Space
                     android:layout_width="24dp"
@@ -152,13 +152,17 @@
 
                 <Button
                     android:id="@+id/btnGallery_medication"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/design_default_color_primary"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:backgroundTint="#4180ab"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="12dp"
                     android:drawableTop="@drawable/gallery"
                     android:text="@string/gallery"
-                    android:textColor="@color/white" />
+                    android:textColor="#ffffff" />
+
             </LinearLayout>
+            <!--Fin Img-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -282,6 +286,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_gravity="start" />
+
             <Spinner
                 android:id="@+id/spnFrequency_medication"
                 android:layout_width="match_parent"
@@ -420,14 +425,17 @@
                                 android:layout_weight="1"
                                 android:textColor="@color/black"
                                 android:textSize="18sp" />
-
                         </LinearLayout>
+
                     </LinearLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <!-- Fin Contenedor desplazable -->
+
     <!-- Footer -->
     <LinearLayout
         android:id="@+id/footerLayout"
@@ -435,13 +443,12 @@
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:background="@color/design_default_color_primary_variant"
+        android:background="#4180ab"
         android:gravity="center"
         android:weightSum="3"
         android:paddingVertical="8dp"
         tools:ignore="DisableBaselineAlignment">
 
-        <!-- Botón Home -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -455,45 +462,42 @@
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/home_content_ly"
-                android:src="@drawable/home"
-                android:textColor="@color/white"
-                tools:ignore="DuplicateSpeakableTextCheck,TouchTargetSizeCheck" />
+                app:srcCompat="@drawable/home"
+                app:tint="#ffffff"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/home_content_ly"
-                android:textColor="@color/white"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <!-- Botón Calendar -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:importantForAccessibility="no"
             android:orientation="vertical"
             android:gravity="center">
 
             <ImageButton
-                android:id="@+id/calendar_button"
+                android:id="@+id/medication_button"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/calendar"
-                android:textColor="@color/white"
-                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                app:srcCompat="@drawable/add_circle"
+                app:tint="#ffffff"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/calendar_content_ly"
-                android:textColor="@color/white"
+                android:text="@string/medication_content_ly"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <!-- Botón Person -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -506,18 +510,17 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/person"
-                android:textColor="@color/white"
-                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                app:srcCompat="@drawable/person"
+                app:tint="#ffffff"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/person_content_ly"
-                android:textColor="@color/white"
+                android:textColor="#ffffff"
                 android:textSize="14sp" />
         </LinearLayout>
-
     </LinearLayout>
     <!-- Fin Footer -->
 </RelativeLayout>

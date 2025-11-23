@@ -46,7 +46,6 @@ class UserController {
         }
     }
 
-    // ******
     fun getAllUsers(): List<User> {
         try {
             return dataManager.getAll()
@@ -72,7 +71,6 @@ class UserController {
             throw Exception(context.getString(R.string.ErrorMsgGetEspecificData))
         }
     }
-    // Busacar Usuario por ID
     fun getUserByUserName(username: String): User ?{
         try {
             return dataManager.getByUserName(username)

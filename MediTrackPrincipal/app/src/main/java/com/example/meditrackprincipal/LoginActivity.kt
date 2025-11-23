@@ -9,10 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import controller.UserController
+import util.SessionManager
 import util.Util
 
 
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     private lateinit var txtNameUser: EditText
     private lateinit var txtPasswordUser: EditText
     private lateinit var userController: UserController
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -58,9 +59,11 @@ class MainActivity : AppCompatActivity() {
         try {
             val user = userController.login(username,password)
             if (user != null){
+                val session = SessionManager(this)
+                session.saveUsername(user.nameUser)  // Guarda el usuario actual
                 Toast.makeText(this,R.string.MsgLoginSuccess, Toast.LENGTH_SHORT).show()
                 cleanScreen()
-                Util.OpenActivity(this, MedicationActivity::class.java)
+                Util.OpenActivity(this, HomeActivity::class.java)
             }else{
                 Toast.makeText(this,R.string.MsgIsNorRegister, Toast.LENGTH_SHORT).show()
                 cleanScreen()

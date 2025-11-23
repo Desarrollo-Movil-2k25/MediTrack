@@ -33,19 +33,18 @@ class MedicationController {
     }
 
     //Eliminar Usurio
-    fun removeMedication(id: Int){
+    fun removeMedication(id: Int, username: String){
         try {
-            val result = dataManager.getById(id)
+            val result = dataManager.getByIdAndUser(id, username)
             if (result == null) {
                 throw Exception(context.getString(R.string.MsgDataNotFound))
             }
-            dataManager.remove(id)
+            dataManager.remove(id,username)
         }catch (e: Exception){
             throw Exception(context.getString(R.string.ErrorMsgRemove))
         }
     }
 
-    // ******
     fun getAllMedications(): List<Medication> {
         try {
             return dataManager.getAll()
@@ -53,12 +52,12 @@ class MedicationController {
             throw Exception(context.getString(R.string.ErrorMsgGetAll))
         }
     }
-    // Busacar Usuario por ID
-    fun getMedicationById(id: Int): Medication ?{
+    fun getMedicationById(id: Int, username: String): Medication? {
         try {
-            return dataManager.getById(id)
-        }catch (e: Exception){
+            return dataManager.getByIdAndUser(id, username)
+        } catch (e: Exception) {
             throw Exception(context.getString(R.string.ErrorMsgGetEspecificData))
         }
     }
+
 }
