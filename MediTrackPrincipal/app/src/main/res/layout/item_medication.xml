@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    android:elevation="6dp"
+    android:radius="16dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="#ffffff">
+
+    <LinearLayout
+        android:padding="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- IMAGEN DEL MEDICAMENTO -->
+        <ImageView
+            android:id="@+id/imgMedication"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_background"
+            android:padding="4dp"
+            android:layout_marginEnd="16dp" />
+
+        <!-- CONTENIDO -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <!-- NOMBRE -->
+            <TextView
+                android:id="@+id/tvMedName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paracetamol"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#4180ab" />
+
+            <!-- DOSIS -->
+            <TextView
+                android:id="@+id/tvMedDose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dosis: 500mg"
+                android:textSize="15sp"
+                android:textColor="#333333"
+                android:layout_marginTop="2dp" />
+
+            <!-- DESCRIPCIÓN -->
+            <TextView
+                android:id="@+id/tvMedDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Para dolor y fiebre"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:layout_marginTop="2dp" />
+
+            <!-- FRECUENCIA -->
+            <TextView
+                android:id="@+id/tvMedFrequency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cada 8 horas"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:layout_marginTop="4dp" />
+
+            <!-- HORA -->
+            <TextView
+                android:id="@+id/tvMedTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hora: 08:00 AM"
+                android:textSize="14sp"
+                android:textColor="#555555"
+                android:layout_marginTop="4dp" />
+
+            <!-- FECHAS -->
+            <TextView
+                android:id="@+id/tvMedStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicio: 2025-11-01"
+                android:textSize="13sp"
+                android:textColor="#555555"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/tvMedEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fin: 2025-11-15"
+                android:textSize="13sp"
+                android:textColor="#555555"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

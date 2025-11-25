@@ -76,6 +76,7 @@
     <string name="imgView_ly">Imagen del medicamento</string>
     <string name="MsgUpdateProfileSuccess">Perfil actualizado correctamente</string>
     <string name="MsgUpdateProfile">Deseas actualizar tu perfil?</string>
+    <string name="empty_list">No hay medicamentos registrados.</string>
     <string-array name="frequency_options">
         <item>Diaria</item>
         <item>Cada 8 horas</item>
