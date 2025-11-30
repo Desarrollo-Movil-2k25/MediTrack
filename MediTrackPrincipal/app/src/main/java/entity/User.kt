@@ -14,11 +14,9 @@ class User : Person {
     }
 
     // Constructor
-    constructor(id: String,name: String,fLastName: String,sLastName: String, phone: Int,email: String,
-                birthday: LocalDate,province: Province,state: String,district: String, address: String,
-                nameUser: String, password: String):super(id,name,fLastName,sLastName,phone,
-                                                          email, birthday, province, state,
-                                                          district,address)
+    constructor(id: String,name: String,fLastName: String,sLastName: String,email: String,
+                nameUser: String, password: String):super(id,name,fLastName,sLastName,
+                                                          email)
     {
         this._nameUser = nameUser
         this._password = password

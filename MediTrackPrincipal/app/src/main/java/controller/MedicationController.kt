@@ -5,7 +5,7 @@ import com.example.meditrackprincipal.R
 import data.IDataManagerMedication
 import data.MemoryDataManagerMedication
 import entity.Medication
-import entity.User
+
 
 class MedicationController {
     private var dataManager: IDataManagerMedication = MemoryDataManagerMedication
@@ -57,6 +57,14 @@ class MedicationController {
             return dataManager.getByIdAndUser(id, username)
         } catch (e: Exception) {
             throw Exception(context.getString(R.string.ErrorMsgGetEspecificData))
+        }
+    }
+
+    fun getMedicationsByUser(username: String): List<Medication> {
+        try {
+            return dataManager.getAllByUser(username)
+        } catch (e: Exception) {
+            throw Exception(context.getString(R.string.ErrorMsgGetAll))
         }
     }
 

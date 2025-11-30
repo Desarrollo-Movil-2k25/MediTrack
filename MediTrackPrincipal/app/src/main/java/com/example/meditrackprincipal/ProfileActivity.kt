@@ -100,12 +100,6 @@ class ProfileActivity : AppCompatActivity() {
                 user.fLastName = txtFirstLastName.text.toString()
                 user.sLastName = txtSecondLastName.text.toString()
                 user.email = txtEmail.text.toString()
-                user.phone = null
-                user.birthday = null
-                user.province = null
-                user.district = null
-                user.state = null
-                user.address = null
                 userController.updateUser(user)
                 Toast.makeText(
                     this,

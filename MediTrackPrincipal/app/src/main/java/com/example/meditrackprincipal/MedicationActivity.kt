@@ -233,14 +233,14 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 medication.frequency = txtFrequency.selectedItem.toString()
                 val timeParsed = Util.parseStringToTimeModern(txtTime.text.toString().trim(), "hh:mm a")
                 if (timeParsed == null) {
-                    Toast.makeText(this, "Hora inválida o no seleccionada", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Hora inválida o no seleccionada", Toast.LENGTH_SHORT).show()
                     return
                 }
                 medication.time = timeParsed
                 // Fechas
                 val startDateParsed = Util.parseStringToDateModern(lbStartDate.text.toString(), "dd/MM/yyyy")
                 if (startDateParsed == null) {
-                    Toast.makeText(this, "Fecha de inicio inválida", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Fecha de inicio inválida", Toast.LENGTH_SHORT).show()
                     return
                 }
                 medication.startDate = startDateParsed
@@ -252,7 +252,12 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 }
                 medication.reminderActive = true
                 medication.taken = false
-                medication.image = (imgPhoto.drawable as BitmapDrawable).bitmap
+                val drawable = imgPhoto.drawable
+                if (drawable is BitmapDrawable) {
+                    medication.image = drawable.bitmap
+                } else {
+                    medication.image = null
+                }
                 medication.ownerUser = currentUser
                 if (!isEditMode){
                     medicationController.addMedication(medication)

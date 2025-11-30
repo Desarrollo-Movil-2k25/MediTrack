@@ -38,6 +38,15 @@
         android:layout_below="@id/headerLayout"
         android:layout_above="@id/footerLayout"
         android:padding="8dp"/>
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_list"
+        android:textSize="18sp"
+        android:textColor="#777777"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
 
     <!-- Footer -->
     <LinearLayout
