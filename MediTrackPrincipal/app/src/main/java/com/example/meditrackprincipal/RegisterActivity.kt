@@ -121,12 +121,6 @@ class RegisterActivity : AppCompatActivity() {
                     user.fLastName = txtLastName.text.toString()
                     user.sLastName = txtSLastName.text.toString()
                     user.email = txtEmail.text.toString()
-                    user.phone = null
-                    user.birthday = null
-                    user.province = null
-                    user.district = null
-                    user.state = null
-                    user.address = null
                     // user.phone = txtPhone.text.toString().toInt()
                     // val bDateParse = Util.parseStringToDateModern(lbBirthday.text.toString(),"dd/MM/yyyy")
                     // user.birthday = LocalDate.of(bDateParse?.year!!,bDateParse.monthValue,bDateParse.dayOfMonth)

@@ -1,6 +1,7 @@
 package entity
 
 class Province {
+    // THIS CLASS NEVER USED IN THE PROJECT
     private var _name: String?="";
     private var _states: MutableList<String>?=null;
 
