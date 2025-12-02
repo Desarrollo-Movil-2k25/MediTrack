@@ -10,9 +10,9 @@ class Medication {
     private var _dose: String = ""
     private var _description: String? = null
     private var _frequency: String = ""
-    private lateinit var _time: LocalTime
-    private lateinit var _startDate: LocalDate
-    private var _endDate: LocalDate? = null
+    private lateinit var _time: String
+    private lateinit var _startDate: String
+    private var _endDate: String? = null
     private var _reminderActive: Boolean? = false
     private var _image: Bitmap? = null
     private var _taken: Boolean? = false
@@ -22,7 +22,7 @@ class Medication {
 
     // Constructor
     constructor(id: Int,name: String, dose: String, description: String?,frequency:
-                String,time: LocalTime, startDate: LocalDate, endDate: LocalDate?,
+                String,time: String, startDate: String, endDate: String?,
                 reminderActive: Boolean, image: Bitmap?,taken: Boolean = false, ownerUser: String
     ) {
         this._id = id
@@ -60,15 +60,15 @@ class Medication {
         get() = _frequency
         set(value) { _frequency = value }
 
-    var time: LocalTime
+    var time: String
         get() = _time
         set(value) { _time = value }
 
-    var startDate: LocalDate
+    var startDate: String
         get() = _startDate
         set(value) { _startDate = value }
 
-    var endDate: LocalDate?
+    var endDate: String?
         get() = _endDate
         set(value) { _endDate = value }
 

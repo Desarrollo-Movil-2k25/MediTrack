@@ -1,6 +1,7 @@
 package com.example.meditrackprincipal
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -13,9 +14,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import controller.UserController
-import entity.Province
 import entity.User
+import kotlinx.coroutines.launch
 import util.Util
 import java.time.LocalDate
 
@@ -31,6 +33,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var txtSLastName: EditText
     // private lateinit var txtPhone: EditText
     private lateinit var txtEmail: EditText
+    lateinit var mycontext: Context
     // private lateinit var lbBirthday: TextView
     // private lateinit var txtProvince: EditText
     // private lateinit var txtDistrict: EditText
@@ -59,6 +62,7 @@ class RegisterActivity : AppCompatActivity() {
         txtSLastName = findViewById(R.id.txtSecondLastName_register)
         // txtPhone = findViewById(R.id.txtPhone_register)
         txtEmail = findViewById(R.id.txtEmail_register)
+        mycontext = this
         // lbBirthday = findViewById(R.id.tvBirthdayValue_register)
         // txtProvince = findViewById(R.id.txtProvince_register)
         // txtDistrict = findViewById(R.id.txtDistrict_register)
@@ -98,57 +102,55 @@ class RegisterActivity : AppCompatActivity() {
                 //&& dateParse != null
     }
     fun savePerson(){
-        try {
-            if (invalidationData()){
-                if(userController.getUserByUserName(txtUsername.text.toString().trim()) != null) {
-                    Toast.makeText(
-                        this, getString(R.string.MsgDuplicated2),
-                        Toast.LENGTH_LONG
-                    ).show()
-                    return
-                }
-                if(userController.getUserById(txtId.text.toString().trim()) != null){
-                    Toast.makeText(this,getString(R.string.MsgDuplicated),
-                        Toast.LENGTH_LONG).show()
-                    return
-                    
+        lifecycleScope.launch {
+            try {
+                if (invalidationData()){
+                    if(userController.getUserByUsername(txtUsername.text.toString().trim()) != null) {
+                        Toast.makeText(
+                            mycontext, getString(R.string.MsgDuplicated2),
+                            Toast.LENGTH_LONG
+                        ).show()
+                        return@launch
+                    }
+                    if(userController.getUserById(txtId.text.toString().trim()) != null){
+                        Toast.makeText(mycontext,getString(R.string.MsgDuplicated),
+                            Toast.LENGTH_LONG).show()
+                        return@launch
+
+                    }else{
+                        val user = User()
+                        user.nameUser = txtUsername.text.toString()
+                        user.password = txtPassword.text.toString()
+                        user.id = txtId.text.toString()
+                        user.name = txtName.text.toString()
+                        user.fLastName = txtLastName.text.toString()
+                        user.sLastName = txtSLastName.text.toString()
+                        user.email = txtEmail.text.toString()
+                        // user.phone = txtPhone.text.toString().toInt()
+                        // val bDateParse = Util.parseStringToDateModern(lbBirthday.text.toString(),"dd/MM/yyyy")
+                        // user.birthday = LocalDate.of(bDateParse?.year!!,bDateParse.monthValue,bDateParse.dayOfMonth)
+                        // val province = Province()
+                        // province.Name= txtProvince.text.toString()
+                        // user.province=province
+                        // user.district = txtDistrict.text.toString()
+                        // user.state = txtState.text.toString()
+                        // user.address = txtAddress.text.toString()
+                        userController.addUser(user)
+                        Toast.makeText(mycontext,getString(R.string.MsgCreateAccSuccess),Toast.LENGTH_LONG).show()
+                        cleanScreen()
+                        Util.OpenActivity(mycontext, LoginActivity::class.java)
+                    }
                 }else{
-                    val user = User()
-                    user.nameUser = txtUsername.text.toString()
-                    user.password = txtPassword.text.toString()
-                    user.id = txtId.text.toString()
-                    user.name = txtName.text.toString()
-                    user.fLastName = txtLastName.text.toString()
-                    user.sLastName = txtSLastName.text.toString()
-                    user.email = txtEmail.text.toString()
-                    user.phone = null
-                    user.birthday = null
-                    user.province = null
-                    user.district = null
-                    user.state = null
-                    user.address = null
-                    // user.phone = txtPhone.text.toString().toInt()
-                    // val bDateParse = Util.parseStringToDateModern(lbBirthday.text.toString(),"dd/MM/yyyy")
-                    // user.birthday = LocalDate.of(bDateParse?.year!!,bDateParse.monthValue,bDateParse.dayOfMonth)
-                    // val province = Province()
-                    // province.Name= txtProvince.text.toString()
-                    // user.province=province
-                    // user.district = txtDistrict.text.toString()
-                    // user.state = txtState.text.toString()
-                    // user.address = txtAddress.text.toString()
-                    userController.addUser(user)
-                    Toast.makeText(this,getString(R.string.MsgCreateAccSuccess),Toast.LENGTH_LONG).show()
-                    cleanScreen()
-                    Util.OpenActivity(this, LoginActivity::class.java)
+                    Toast.makeText(mycontext,"Datos Incompletos!!!",
+                        Toast.LENGTH_LONG).show()
                 }
-            }else{
-                Toast.makeText(this,"Datos Incompletos!!!",
-                    Toast.LENGTH_LONG).show()
+            }catch (e: Exception){
+                Toast.makeText(mycontext,e.message.toString(), Toast.LENGTH_LONG).show()
+                cleanScreen()
             }
-        }catch (e: Exception){
-            Toast.makeText(this,e.message.toString(), Toast.LENGTH_LONG).show()
-            cleanScreen()
+
         }
+
     }
     private fun cleanScreen(){
         txtUsername.setText("")
