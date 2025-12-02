@@ -102,7 +102,7 @@
             android:padding="16dp"
             android:gravity="center_horizontal">
 
-            <!-- Imagen del medicamento-->
+            <!-- Imagen del medicamento
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                 android:background="@drawable/rounded_corner"
                 android:scaleType="centerCrop"
                 android:layout_marginBottom="12dp" />
-            <!--Img-->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -161,9 +161,8 @@
                     android:text="@string/gallery"
                     android:textColor="#ffffff" />
 
-            </LinearLayout>
+            </LinearLayout>-->
             <!--Fin Img-->
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

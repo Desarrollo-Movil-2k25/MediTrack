@@ -9,9 +9,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import controller.MedicationController
+import kotlinx.coroutines.launch
 import util.SessionManager
 import util.Util
 
@@ -50,18 +52,24 @@ class HomeActivity : AppCompatActivity() {
         val tvEmpty = findViewById<TextView>(R.id.tvEmpty)
 
         val currentUser = sesion.getUsername()
-        val medications = medicationController.getMedicationsByUser(currentUser)
+        lifecycleScope.launch {
+            try {
+                val medications = medicationController.getMedicationsByUser(currentUser)
 
-        // Mostrar mensaje si no hay medicamentos
-        if (medications.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
-            recycler.visibility = View.GONE
-        } else {
-            tvEmpty.visibility = View.GONE
-            recycler.visibility = View.VISIBLE
+                if (medications.isEmpty()) {
+                    tvEmpty.visibility = View.VISIBLE
+                    recycler.visibility = View.GONE
+                } else {
+                    tvEmpty.visibility = View.GONE
+                    recycler.visibility = View.VISIBLE
+                    recycler.adapter = MedicationAdapter(medications)
+                }
+
+            } catch (e: Exception) {
+                tvEmpty.text = "Error cargando medicamentos"
+                tvEmpty.visibility = View.VISIBLE
+                recycler.visibility = View.GONE
+            }
         }
-
-        // Cargar adapter
-        recycler.adapter = MedicationAdapter(medications)
     }
 }

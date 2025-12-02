@@ -58,11 +58,13 @@ class MedicationAdapter(private val medications: List<Medication>) :
             holder.tvEndDate.visibility = View.GONE
         }
 
-        if (med.image != null) {
+        holder.imgMedication.setImageResource(R.drawable.pill_default)
+
+        /*if (med.image != null) {
             holder.imgMedication.setImageBitmap(med.image)
         } else {
             holder.imgMedication.setImageResource(R.drawable.pill_default)
-        }
+        }*/
     }
 
     override fun getItemCount(): Int = medications.size

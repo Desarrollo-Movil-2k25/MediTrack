@@ -1,5 +1,6 @@
 package com.example.meditrackprincipal
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,8 +14,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import controller.UserController
 import entity.User
+import kotlinx.coroutines.launch
 import util.SessionManager
 import util.Util
 
@@ -22,13 +25,14 @@ import util.Util
 class ProfileActivity : AppCompatActivity() {
     private lateinit var userController: UserController
     private lateinit var sessionManager: SessionManager
-
     private lateinit var txtEmail: EditText
     private lateinit var txtName: EditText
     private lateinit var txtFirstLastName: EditText
     private lateinit var txtSecondLastName: EditText
 
     private lateinit var tvProfileUser: TextView
+
+    lateinit var mycontext: Context
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,9 +54,12 @@ class ProfileActivity : AppCompatActivity() {
         txtFirstLastName = findViewById(R.id.txtFirstLastName_profile)
         txtSecondLastName = findViewById(R.id.txtSecondLastName_profile)
         tvProfileUser = findViewById(R.id.tvProfileUser)
+        mycontext = this
 
         val username = sessionManager.getUsername()
+        Log.d("SESSION", "Recuperado de sesión nameUser: $username")
         tvProfileUser.text = username
+        //val user = "Mramores"
         searchUser(username)
 
         val btnUpdateProfile = findViewById<Button>(R.id.btnUpdateProfile)
@@ -88,54 +95,66 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun updateProfile(username: String) {
-        try {
-            if (username.isEmpty()) return
-            val userGet = userController.getUserByUserName(username)
-            if (userGet != null) {
-                val user = User()
-                user.nameUser = userGet.nameUser
-                user.password = userGet.password
-                user.id = userGet.id
-                user.name = txtName.text.toString()
-                user.fLastName = txtFirstLastName.text.toString()
-                user.sLastName = txtSecondLastName.text.toString()
-                user.email = txtEmail.text.toString()
-                userController.updateUser(user)
-                Toast.makeText(
-                    this,
-                    getString(R.string.MsgUpdateProfileSuccess),
-                    Toast.LENGTH_LONG
-                ).show()
+        lifecycleScope.launch {
+            try {
+                if (username.isEmpty()) return@launch
+
+                val userGet = userController.getUserByUsername(username)
+
+                if (userGet != null) {
+
+                    val user = User().apply {
+                        nameUser = userGet.nameUser
+                        password = userGet.password
+                        id = userGet.id
+                        name = txtName.text.toString()
+                        fLastName = txtFirstLastName.text.toString()
+                        sLastName = txtSecondLastName.text.toString()
+                        email = txtEmail.text.toString()
+                    }
+
+                    userController.updateUser(user)
+                    sessionManager.saveUsername(user.nameUser)
+
+                    Toast.makeText(
+                        mycontext,
+                        getString(R.string.MsgUpdateProfileSuccess),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            } catch (e: Exception) {
+                Toast.makeText(mycontext, "ERROR: ${e.message}", Toast.LENGTH_LONG).show()
+                e.printStackTrace()
             }
-        } catch (e: Exception) {
-            Toast.makeText(this, "ERROR: ${e.message}", Toast.LENGTH_LONG).show()
-            e.printStackTrace()
         }
     }
+
 
     private fun searchUser(username: String) {
-        try {
-            if (username.isEmpty()) return
+        lifecycleScope.launch {
+            try {
+                if (username.isEmpty()) return@launch
 
-            val user = userController.getUserByUserName(username)
+                val user = userController.getUserByUsername(username)
 
-            if (user != null) {
-                txtEmail.setText(user.email)
-                txtName.setText(user.name)
-                txtFirstLastName.setText(user.fLastName)
-                txtSecondLastName.setText(user.sLastName)
-            } else {
-                // Si el usuario no existe, limpiar pantalla
-                txtEmail.setText("")
-                txtName.setText("")
-                txtFirstLastName.setText("")
-                txtSecondLastName.setText("")
+                if (user != null) {
+                    txtEmail.setText(user.email)
+                    txtName.setText(user.name)
+                    txtFirstLastName.setText(user.fLastName)
+                    txtSecondLastName.setText(user.sLastName)
+                } else {
+                    txtEmail.setText("")
+                    txtName.setText("")
+                    txtFirstLastName.setText("")
+                    txtSecondLastName.setText("")
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
-
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
+
     private fun logout() {
         // Borrar la sesión
         sessionManager.clearSession()

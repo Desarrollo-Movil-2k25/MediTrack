@@ -3,6 +3,7 @@ package com.example.meditrackprincipal
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -25,8 +26,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import controller.MedicationController
 import entity.Medication
+import kotlinx.coroutines.launch
 import util.SessionManager
 import util.Util
 import java.text.SimpleDateFormat
@@ -52,6 +55,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
     private var month = calendar.get(Calendar.MONTH)
     private var day = calendar.get(Calendar.DAY_OF_MONTH)
     private lateinit var imgPhoto: ImageView
+    lateinit var mycontext: Context
 
 
 
@@ -73,7 +77,8 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         txtTime = findViewById(R.id.txtTime_medication)
         lbStartDate = findViewById(R.id.tvStartDate_medication)
         lbEndDate = findViewById(R.id.tvEndDate_medication)
-        imgPhoto = findViewById(R.id.imgMedication)
+        // imgPhoto = findViewById(R.id.imgMedication)
+        mycontext = this
 
         val btnSelectStartDate = findViewById<ImageButton>(R.id.btnSelectStartDate)
         btnSelectStartDate.setOnClickListener { view ->
@@ -127,7 +132,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
             }
         }
 
-        val btnCamera = findViewById<Button>(R.id.btnCamera_medication)
+        /*val btnCamera = findViewById<Button>(R.id.btnCamera_medication)
         btnCamera.setOnClickListener { view ->
             takePhoto()
         }
@@ -135,7 +140,7 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         val btnGallery = findViewById<Button>(R.id.btnGallery_medication)
         btnGallery.setOnClickListener { view ->
             selectPhoto()
-        }
+        }*/
 
         val btnHome = findViewById<ImageButton>(R.id.home_button)
         btnHome.setOnClickListener { view ->
@@ -193,7 +198,17 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         return amPmFormat.format(cal.time)
     }
     private fun invalidationData(): Boolean {
-        val startDateParse = Util.parseStringToDateModern(lbStartDate.text.toString(), "dd/MM/yyyy")
+
+        if (isEditMode && lbStartDate.text.toString().isNotEmpty()) {
+            return txtId.text.trim().isNotEmpty() &&
+                    txtName.text.trim().isNotEmpty() &&
+                    txtFrequency.selectedItem != null &&
+                    txtTime.text.trim().isNotEmpty()
+        }
+
+        val startDateParse =
+            Util.parseStringToDateModern(lbStartDate.text.toString(), "dd/MM/yyyy")
+
         val endDateValid = lbEndDate.text.trim().isEmpty() ||
                 Util.parseStringToDateModern(lbEndDate.text.toString(), "dd/MM/yyyy") != null
 
@@ -204,147 +219,190 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
                 startDateParse != null &&
                 endDateValid
     }
+
     private fun isInt(value: String): Boolean {
         return value.trim().toIntOrNull() != null
     }
     private fun saveMedication() {
-        try {
-            val medication = Medication()
-            val session = SessionManager(this)
-            val currentUser = session.getUsername()
+        lifecycleScope.launch {
+            try {
+                val session = SessionManager(mycontext)
+                val currentUser = session.getUsername()
 
-            val btnSelectStartDate = findViewById<ImageButton>(R.id.btnSelectStartDate)
-            if (invalidationData()) {
-                // Validar duplicados
-                if (medicationController.getMedicationById(txtId.text.toString().trim().toInt(),currentUser) != null && !isEditMode) {
-                    Toast.makeText(this, getString(R.string.MsgDuplicated), Toast.LENGTH_LONG).show()
-                    return
+                if (!invalidationData()) {
+
+                    Toast.makeText(mycontext, "Datos incompletos o inválidos", Toast.LENGTH_LONG).show()
+                    return@launch
                 }
-                if (isInt(txtId.text.toString().trim())){
-                    medication.id = txtId.text.toString().trim().toInt()
-                }else{
-                    Toast.makeText(this,R.string.MsgNotIsInt, Toast.LENGTH_LONG).show()
+
+                val idText = txtId.text.toString().trim()
+                if (!isInt(idText)) {
+                    Toast.makeText(mycontext, R.string.MsgNotIsInt, Toast.LENGTH_LONG).show()
                     txtId.requestFocus()
-                    return
+                    return@launch
                 }
+
+                val id = idText.toInt()
+
+                // Validar duplicado solo si NO está en modo edición
+                if (!isEditMode) {
+                    val existing = medicationController.getMedicationById(id, currentUser)
+                    if (existing != null) {
+                        Toast.makeText(mycontext, getString(R.string.MsgDuplicated), Toast.LENGTH_LONG).show()
+                        return@launch
+                    }
+                }
+
+                val medication = Medication()
+                medication.id = id
                 medication.name = txtName.text.toString().trim()
                 medication.dose = txtDose.text.toString().trim()
-                medication.description = txtDescription.text.toString().trim().ifEmpty {null}
+                medication.description = txtDescription.text.toString().trim().ifEmpty { null }
                 medication.frequency = txtFrequency.selectedItem.toString()
-                val timeParsed = Util.parseStringToTimeModern(txtTime.text.toString().trim(), "hh:mm a")
+
+                val timeText = txtTime.text.toString().trim()
+                val timeParsed = Util.parseStringToTimeModern(timeText, "hh:mm a")
                 if (timeParsed == null) {
-                    Toast.makeText(this, "Hora inválida o no seleccionada", Toast.LENGTH_SHORT).show()
-                    return
+                    Toast.makeText(mycontext, "Hora inválida o no seleccionada", Toast.LENGTH_SHORT).show()
+                    return@launch
                 }
-                medication.time = timeParsed
-                // Fechas
-                val startDateParsed = Util.parseStringToDateModern(lbStartDate.text.toString(), "dd/MM/yyyy")
+                // Si Medication.time es String:
+                val timeIso = timeParsed.format(DateTimeFormatter.ISO_LOCAL_TIME)  // "12:00:00"
+                medication.time = timeIso
+
+                val startText = lbStartDate.text.toString()
+                val startDateParsed = Util.parseStringToDateModern(startText, "dd/MM/yyyy")
                 if (startDateParsed == null) {
-                    Toast.makeText(this, "Fecha de inicio inválida", Toast.LENGTH_SHORT).show()
-                    return
+                    Toast.makeText(mycontext, "Fecha de inicio inválida", Toast.LENGTH_SHORT).show()
+                    return@launch
                 }
-                medication.startDate = startDateParsed
-                if (lbEndDate.text.toString().trim().isNotEmpty()) {
-                    val endDateParsed = Util.parseStringToDateModern(lbEndDate.text.toString(), "dd/MM/yyyy")
-                    medication.endDate = LocalDate.of(endDateParsed!!.year, endDateParsed.monthValue, endDateParsed.dayOfMonth)
+                val startIso = startDateParsed.format(DateTimeFormatter.ISO_LOCAL_DATE) // "2025-12-02"
+                medication.startDate = startIso  // String
+
+                val endText = lbEndDate.text.toString().trim()
+                if (endText.isNotEmpty()) {
+                    val endDateParsed = Util.parseStringToDateModern(endText, "dd/MM/yyyy")
+                    if (endDateParsed == null) {
+                        Toast.makeText(mycontext, "Fecha de fin inválida", Toast.LENGTH_SHORT).show()
+                        return@launch
+                    }
+                    val endIso = endDateParsed.format(DateTimeFormatter.ISO_LOCAL_DATE)
+                    medication.endDate = endIso   // String?
                 } else {
                     medication.endDate = null
                 }
+
                 medication.reminderActive = true
                 medication.taken = false
-                val drawable = imgPhoto.drawable
-                if (drawable is BitmapDrawable) {
-                    medication.image = drawable.bitmap
-                } else {
-                    medication.image = null
-                }
+                medication.image = null
                 medication.ownerUser = currentUser
-                if (!isEditMode){
+
+                // Llamar API
+                if (!isEditMode)
                     medicationController.addMedication(medication)
-                }else
+                else
                     medicationController.updateMedication(medication)
+
                 cleanScreen()
                 txtId.isEnabled = true
-                btnSelectStartDate.isEnabled = true
-                Toast.makeText(this,getString(R.string.MsgCreateMedicationSuccess),Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Datos incompletos o inválidos", Toast.LENGTH_LONG).show()
+                findViewById<ImageButton>(R.id.btnSelectStartDate).isEnabled = true
+
+                val msg = if (isEditMode) R.string.MsgUpdateMedicationSuccess
+                else R.string.MsgCreateMedicationSuccess
+
+                Toast.makeText(mycontext, getString(msg), Toast.LENGTH_LONG).show()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(mycontext, "Error: ${e.message ?: e::class.simpleName}", Toast.LENGTH_LONG).show()
+                cleanScreen()
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Toast.makeText(this, "Error: ${e.message ?: e::class.simpleName}", Toast.LENGTH_LONG).show()
-            cleanScreen()
         }
     }
+
+
     private fun searchMedication(id: Int) {
-        if(!isInt(id.toString().trim())){
-            Toast.makeText(this,R.string.MsgNotIsInt, Toast.LENGTH_LONG).show()
-            return
-        }
-        try {
-            val session = SessionManager(this)
-            val currentUser = session.getUsername()
-            val btnSelectStartDate = findViewById<ImageButton>(R.id.btnSelectStartDate)
-            val medication = medicationController.getMedicationById(id,currentUser)
-            if (medication != null) {
+        lifecycleScope.launch {
+            try {
+                val session = SessionManager(mycontext)
+                val currentUser = session.getUsername()
+
+                val medication = medicationController.getMedicationById(id, currentUser)
+
+                if (medication == null) {
+                    cleanScreen()
+                    Toast.makeText(mycontext, R.string.MsgDataNotFound, Toast.LENGTH_LONG).show()
+                    return@launch
+                }
+
                 isEditMode = true
+
                 txtId.setText(medication.id.toString())
                 txtId.isEnabled = false
+
                 txtDose.setText(medication.dose)
                 txtName.setText(medication.name)
                 txtDescription.setText(medication.description ?: "")
-                imgPhoto.setImageBitmap(medication.image)
-                val frequencyAdapter = ArrayAdapter.createFromResource(
-                    this,
+
+                // SPINNER
+                val adapter = ArrayAdapter.createFromResource(
+                    mycontext,
                     R.array.frequency_options,
                     android.R.layout.simple_spinner_item
                 )
-                frequencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                txtFrequency.adapter = frequencyAdapter
-                txtFrequency.setSelection(frequencyAdapter.getPosition(medication.frequency))
-                txtTime.setText(medication.time.format(DateTimeFormatter.ofPattern("hh:mm a")))
-                val startDate = medication.startDate
-                lbStartDate.text = startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                lbStartDate.isEnabled = false
-                btnSelectStartDate.isEnabled = false
-                year = startDate.year
-                month = startDate.monthValue - 1
-                day = startDate.dayOfMonth
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                txtFrequency.adapter = adapter
+                txtFrequency.setSelection(adapter.getPosition(medication.frequency))
 
+                // TIME (ISO -> AM/PM)
+                val parsedTime = java.time.LocalTime.parse(medication.time)
+                val timeFormatted = parsedTime.format(DateTimeFormatter.ofPattern("hh:mm a"))
+                txtTime.setText(timeFormatted)
+
+                // START DATE (ISO -> dd/MM/yyyy)
+                val parsedStart = LocalDate.parse(medication.startDate)
+                lbStartDate.text = parsedStart.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+                // END DATE
                 if (medication.endDate != null) {
-                    val endDate = medication.endDate!!
-                    lbEndDate.text = endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    val parsedEnd = LocalDate.parse(medication.endDate!!)
+                    lbEndDate.text = parsedEnd.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
                 } else {
                     lbEndDate.text = ""
                 }
-            } else {
-                cleanScreen()
-                Toast.makeText(this, R.string.MsgDataNotFound, Toast.LENGTH_LONG).show()
-            }
-        } catch (e: Exception) {
-            cleanScreen()
-            Toast.makeText(this, e.message.toString(), Toast.LENGTH_LONG).show()
-        }
-    }
-    private fun deleteMedication() {
-        try {
-            val session = SessionManager(this)
-            val currentUser = session.getUsername()
-            medicationController.removeMedication(txtId.text.toString().trim().toInt(),currentUser)
-            cleanScreen()
-            Toast.makeText(
-                this, getString(R.string.MsgDeleteSuccess),
-                Toast.LENGTH_LONG
-            ).show()
-            txtId.isEnabled = true
-        }catch (e: Exception){
-            Toast.makeText(
-                this, getString(R.string.ErrorMsgRemove),
-                Toast.LENGTH_LONG
-            ).show()
-        }
 
+            } catch (e: Exception) {
+                cleanScreen()
+                Toast.makeText(mycontext, e.message ?: "Error", Toast.LENGTH_LONG).show()
+            }
+        }
     }
+
+    private fun deleteMedication() {
+        lifecycleScope.launch {
+            try {
+                val session = SessionManager(mycontext)
+                val currentUser = session.getUsername()
+
+                val id = txtId.text.toString().trim().toInt()
+
+                medicationController.removeMedication(id, currentUser)
+
+                cleanScreen()
+                txtId.isEnabled = true
+
+                Toast.makeText(mycontext, getString(R.string.MsgDeleteSuccess), Toast.LENGTH_LONG).show()
+
+            } catch (e: Exception) {
+                Toast.makeText(
+                    mycontext,
+                    e.message ?: getString(R.string.ErrorMsgRemove),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
     private fun cleanScreen(){
         txtId.setText("")
         txtName.setText("")
@@ -354,7 +412,9 @@ class MedicationActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListen
         txtTime.setText("")
         lbStartDate.text = ""
         lbEndDate.text = ""
-        imgPhoto.setImageBitmap(null)
+        txtId.isEnabled = true
+
+        //imgPhoto.setImageBitmap(null)
     }
     private val cameraPreviewLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap: Bitmap? ->
         if (bitmap != null) {
