@@ -1,6 +1,8 @@
 package com.example.meditrackprincipal
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -8,7 +10,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import controller.UserController
+import kotlinx.coroutines.launch
 import util.SessionManager
 import util.Util
 
@@ -19,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var userController: UserController
     private lateinit var btnLogin: Button
     private lateinit var btnCreateAccount: Button
+    lateinit var mycontext: Context
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
         txtPasswordUser = findViewById(R.id.txtPassword_user_input)
         btnLogin = findViewById(R.id.login_button)
         btnCreateAccount = findViewById(R.id.create_accoutn_button)
+        mycontext = this
         btnLogin.setOnClickListener {
             login()
         }
@@ -50,28 +56,38 @@ class LoginActivity : AppCompatActivity() {
         } else true
     }
     private fun login() {
-        val username = txtNameUser.text.toString().trim()
-        val password = txtPasswordUser.text.toString().trim()
+        lifecycleScope.launch {
+            val username = txtNameUser.text.toString().trim()
+            val password = txtPasswordUser.text.toString().trim()
 
-        if (!validateField(username, txtNameUser, "Username is required")) return
-        if (!validateField(password, txtPasswordUser, "Password is required")) return
+            if (!validateField(username, txtNameUser, "Username is required")) return@launch
+            if (!validateField(password, txtPasswordUser, "Password is required")) return@launch
 
-        try {
-            val user = userController.login(username,password)
-            if (user != null){
-                val session = SessionManager(this)
-                session.saveUsername(user.nameUser)  // Guarda el usuario actual
-                Toast.makeText(this,R.string.MsgLoginSuccess, Toast.LENGTH_SHORT).show()
+            try {
+                val user = userController.login(username, password)
+
+                val session = SessionManager(mycontext)
+                session.saveUsername(user.nameUser.trim())
+
+
+                Toast.makeText(
+                    mycontext,
+                    getString(R.string.MsgLoginSuccess),
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 cleanScreen()
-                Util.OpenActivity(this, HomeActivity::class.java)
-            }else{
-                Toast.makeText(this,R.string.MsgIsNorRegister, Toast.LENGTH_SHORT).show()
+                Util.OpenActivity(mycontext, HomeActivity::class.java)
+
+            } catch (e: Exception) {
+                Toast.makeText(
+                    mycontext,
+                    e.message ?: "Error during login.",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 cleanScreen()
             }
-
-        }catch (e: Exception){
-            Toast.makeText(this, e.message ?: "Error during login.", Toast.LENGTH_SHORT).show()
-            cleanScreen()
         }
     }
     private fun cleanScreen(){
