@@ -5,7 +5,9 @@ Aplicación móvil en Kotlin para gestionar medicamentos, con registro, recordat
 
 # Api Service MediTrack
 - Repositorio del codigo hecho en node node.js : https://github.com/Desarrollo-Movil-2k25/API-SERVICE_MediTrack
-- Documentacion de la api https://esteban-609399.postman.co/workspace/My-Workspace~3b97e4a9-acef-4c7a-888c-0367e8ad0f55/collection/45666071-ae3a1cc4-6088-42b7-a11d-f52add062208?action=share&creator=45666071
+- Documentacion de la api [https://esteban-609399.postman.co/workspace/My-Workspace~3b97e4a9-acef-4c7a-888c-0367e8ad0f55/collection/45666071-ae3a1cc4-6088-42b7-a11d-f52add062208?action=share&creator=45666071](https://documenter.getpostman.com/view/45666071/2sB3dLUXGj)
+- API: http://api-meditrack-dfa7dzd8brh8f7ee.eastus-01.azurewebsites.net
+
 
 # Idea de proyecto 
 - Control de Medicamentos
